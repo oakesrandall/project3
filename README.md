@@ -2,8 +2,8 @@ This is the readme for our project 3 app.  This app will show users random photo
 
 This is test
 
+Rett
 Alex LI
-
-
 David Randall ╭∩╮（︶︿︶）╭∩╮
+
 
