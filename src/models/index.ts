@@ -10,8 +10,8 @@ var Transactions = sequelize.import("./transactions");
 // User.hasMany(Restaurant);
 // Restaurant.hasOne(User);
 
-Restaurant.belongsTo(User);
-User.hasMany(Restaurant);
+// Restaurant.belongsTo(User);
+// User.hasMany(Restaurant);
 
 User.hasMany(Transactions);
 //Transactions.hasMany(User);

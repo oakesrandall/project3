@@ -3,7 +3,8 @@ module.exports = function(sequelize, Sequelize) {
     userId: Sequelize.INTEGER,
     restaurantId: Sequelize.INTEGER,
     likes: Sequelize.INTEGER,
-    trigger: Sequelize.BOOLEAN
+    trigger: Sequelize.BOOLEAN,
+    favorite: Sequelize.BOOLEAN
   });
 
   return model;

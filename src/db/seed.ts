@@ -48,7 +48,7 @@ var userCreate = function() {
 // });
 var oneRest = function() {
 	return DB.Restaurant.create({
-	    name: "mcbangers",
+	    name: "lols",
 	    url: "www.m.com",
 	    address: "789 m ave"
 		});
