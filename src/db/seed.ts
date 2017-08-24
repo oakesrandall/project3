@@ -18,3 +18,23 @@ var restaurantDummy = [
     address: "789 m ave"
 	}
 ];
+
+var userCreate = function() {
+	return DB.User.create({
+		local: {
+			email:"asdf",
+			password:"asdf"
+		}
+	})
+	.then(function(user){
+		DB.Restaurants.bulkCreate(restaurantDummy)
+		.then(function(restaurant){
+			DB.Transactions.create({
+				userId: user.id,
+				restaurantId: restaurant,
+				likes: 2,
+				trigger: false
+			})
+		});
+	})
+}
