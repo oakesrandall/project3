@@ -24,6 +24,30 @@ var restaurantDummy = [
 	}
 ];
 
+var transactDummy = [
+	{
+		userId: 1,
+    restaurantId: 1,
+    likes: 3,
+    trigger: false,
+    favorite: false
+  },
+	{
+		userId: 1,
+    restaurantId: 2,
+    likes: 3,
+    trigger: false,
+    favorite: false
+  },
+	{
+		userId: 1,
+    restaurantId: 3,
+    likes: 5,
+    trigger: true,
+    favorite: true
+  }
+];
+
 var userCreate = function() {
 	return DB.User.create({
 			email:"asdf",
@@ -46,11 +70,19 @@ var userCreate = function() {
 // .then(function() {
 // 	process.exit();
 // });
-var oneRest = function() {
-	return DB.Restaurant.create({
-	    name: "lols",
-	    url: "www.m.com",
-	    address: "789 m ave"
-		});
+var rest = function() {
+	return DB.Restaurant.bulkCreate(restaurantDummy);
 };
-oneRest();
+var user = function() {
+	return DB.User.create({
+			email:"asdf",
+			password:"asdf"
+	})
+}
+
+var transact = function() {
+	return DB.Transactions.bulkCreate(transactDummy)
+}
+rest();
+user();
+transact();
