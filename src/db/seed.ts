@@ -16,6 +16,11 @@ var restaurantDummy = [
     name: "mcbangers",
     url: "www.m.com",
     address: "789 m ave"
+	},
+	{
+		name: "asdf",
+		url: "www.asdf.com",
+		address: "asd m ave"
 	}
 ];
 
