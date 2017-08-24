@@ -21,13 +21,11 @@ var restaurantDummy = [
 
 var userCreate = function() {
 	return DB.User.create({
-		local: {
 			email:"asdf",
 			password:"asdf"
-		}
 	})
 	.then(function(user){
-		DB.Restaurants.bulkCreate(restaurantDummy)
+		DB.Restaurant.bulkCreate(restaurantDummy)
 		.then(function(restaurant){
 			DB.Transactions.create({
 				userId: user.id,
@@ -38,3 +36,16 @@ var userCreate = function() {
 		});
 	})
 }
+
+// userCreate()
+// .then(function() {
+// 	process.exit();
+// });
+var oneRest = function() {
+	return DB.Restaurant.create({
+	    name: "mcbangers",
+	    url: "www.m.com",
+	    address: "789 m ave"
+		});
+};
+oneRest();
