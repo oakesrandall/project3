@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as firebase from 'firebase';
-import { ApiKeyService } from '../app/apikey.service';
+import { ApiKeyService } from './apikey.service';
 
 @Component({
   selector: 'app-root',
