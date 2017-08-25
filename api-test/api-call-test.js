@@ -28,11 +28,16 @@ function getRestaurantDetails() {
 			//console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
 			//console.log('body:', body); // Print the response body
 			var parsedData = JSON.parse(body);
-			console.log(parsedData.result.name);
-			console.log(parsedData.result.formatted_address);
-			console.log(parsedData.result.geometry.location.lat);
-			console.log(parsedData.result.geometry.location.lng);
-			console.log(parsedData.result.website);
+				for (let i in parsedData.result.photos) {
+					if (parsedData.result.photos[i].photo_reference) {
+						console.log(parsedData.result.photos[i].photo_reference);
+					}
+				}
+			// console.log(parsedData.result.photos);
+			// console.log(parsedData.result.formatted_address);
+			// console.log(parsedData.result.geometry.location.lat);
+			// console.log(parsedData.result.geometry.location.lng);
+			// console.log(parsedData.result.website);
 		});
 	});
 }
