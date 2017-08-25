@@ -22,12 +22,9 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
-<<<<<<< HEAD
     "firebase": "^4.3.0",
-=======
     "pg": "^7.2.0",
     "pg-hstore": "^2.3.2",
->>>>>>> 0d767039b5a90d10098f97e04aa759beca71a2ce
     "rxjs": "^5.4.2",
     "sequelize": "^4.7.5",
     "zone.js": "^0.8.14"
