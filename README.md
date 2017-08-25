@@ -10,6 +10,7 @@ This is the readme for our project 3 app.  This app will show users random photo
 
 ### Trello
 <p> Our trello board [Trello](https://trello.com/b/3D15p0fo/project-3)</p>
+[Trello](https://trello.com/b/RV3tB7l3/project-2)
 
 ### User Research
 lol not done
