@@ -15,6 +15,8 @@ import { HttpModule } from '@angular/http';
 import { DataService } from './data-storage.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 export class MyHammerConfig extends HammerGestureConfig  {
@@ -36,13 +38,18 @@ export class MyHammerConfig extends HammerGestureConfig  {
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AngularFireModule,
+    AngularFireAuthModule,
+    BrowserAnimationsModule
+
   ],
   providers: [
     AuthService,
     ApiKeyService,
     DataService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
+
   ],
   bootstrap: [AppComponent],
 })
