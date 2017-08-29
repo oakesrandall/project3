@@ -1,15 +1,18 @@
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from './data-storage.service';
 
 //import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 	//user: Observable<firebase.User>;
 	token: string;
-	email: string;
+	newEmail = <any>{};
 	constructor(
-		private router: Router) {}
+		private router: Router,
+		private dataService: DataService
+	) {}
 
 	signupUser(email: string, password: string) {
 		firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -44,6 +47,7 @@ export class AuthService {
 				(token: string) => this.token = token
 			);
 			// need to call data service to get user info
+
 			this.router.navigate(['']);
 			return this.token;
 	}
