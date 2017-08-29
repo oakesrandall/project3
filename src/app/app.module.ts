@@ -4,24 +4,36 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
 import { AppComponent } from './app.component';
 import { ImageComponent } from './image/image.component';
+import { AboutComponent } from './about/about.component';
+import { LandingComponent } from './landing/landing.component';
 import { FormsModule } from '@angular/forms';
 import { ApiKeyService } from './apikey.service';
 import { AboutComponent } from './about/about.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { HeaderComponent } from './header/header.component';
+import { HttpModule } from '@angular/http';
+import { DataService } from './data-storage.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageComponent,
-    AboutComponent
-    
-    
+    AboutComponent,
+    FavoritesComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpModule,
+    AngularFireModule,
+    AngularFireAuthModule
   ],
-  providers: [AuthService, ApiKeyService],
+  providers: [AuthService, ApiKeyService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
