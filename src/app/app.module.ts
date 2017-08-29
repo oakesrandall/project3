@@ -8,7 +8,6 @@ import { AboutComponent } from './about/about.component';
 import { LandingComponent } from './landing/landing.component';
 import { FormsModule } from '@angular/forms';
 import { ApiKeyService } from './apikey.service';
-import { AboutComponent } from './about/about.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpModule } from '@angular/http';
