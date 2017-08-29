@@ -13,7 +13,10 @@ function show(req, res) {
 }
 
 function create(req, res) {
-
+	User.create(req.body).then(function(user){
+    if(!user) res.send(res, "not saved");
+    else res.json(user);
+  });
 }
 
 function update(req, res) {

@@ -8,10 +8,10 @@ import { AboutComponent } from './about/about.component';
 import { LandingComponent } from './landing/landing.component';
 import { FormsModule } from '@angular/forms';
 import { ApiKeyService } from './apikey.service';
+import { AboutComponent } from './about/about.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-
 
 export class MyHammerConfig extends HammerGestureConfig  {
   overrides = <any>{
@@ -19,10 +19,17 @@ export class MyHammerConfig extends HammerGestureConfig  {
   };
 }
 
+import { HttpModule } from '@angular/http';
+import { DataService } from './data-storage.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     ImageComponent,
+    AboutComponent,
     FavoritesComponent,
     HeaderComponent,
   ],
@@ -31,7 +38,11 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [AuthService, ApiKeyService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig } ],
+  providers: [AuthService, ApiKeyService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }, DataService],
+    HttpModule,
+    AngularFireModule,
+    AngularFireAuthModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
