@@ -8,13 +8,14 @@ import { AboutComponent } from './about/about.component';
 import { LandingComponent } from './landing/landing.component';
 import { FormsModule } from '@angular/forms';
 import { ApiKeyService } from './apikey.service';
-import { AboutComponent } from './about/about.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpModule } from '@angular/http';
 import { DataService } from './data-storage.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     FormsModule,
     HttpModule,
     AngularFireModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService, ApiKeyService, DataService],
   bootstrap: [AppComponent]

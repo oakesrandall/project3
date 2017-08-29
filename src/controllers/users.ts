@@ -13,7 +13,7 @@ function show(req, res) {
 }
 
 function create(req, res) {
-
+	console.log("trying to create user");
 }
 
 function update(req, res) {
