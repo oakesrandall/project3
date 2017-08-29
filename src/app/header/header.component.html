@@ -1,0 +1,31 @@
+<nav class="navbar navbar-inverse bg-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">App Title</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+
+      	<span class="icon-bar"></span>
+      	<span class="icon-bar"></span>
+      	<span class="icon-bar"></span>
+
+    	</button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+    	<ul class="nav navbar-nav">
+    			<li routerLinkActive="active"><a routerLink="/">Home</a>
+          </li>
+				<li>
+					<a routerLink="/favorites">Favorites</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+		      <li><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		      <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ng-template>
+    	</ul>
+    </div>
+  </div>
+</nav>
+      
