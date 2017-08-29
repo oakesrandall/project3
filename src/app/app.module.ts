@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { ApiKeyService } from './apikey.service';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
+import { HttpModule } from '@angular/http';
+import { DataService } from './data-storage.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -16,14 +20,16 @@ import { HeaderComponent } from './header/header.component';
     FavoritesComponent,
     HeaderComponent
     
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpModule,
+    AngularFireModule,
+    AngularFireAuthModule
   ],
-  providers: [AuthService, ApiKeyService],
+  providers: [AuthService, ApiKeyService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
