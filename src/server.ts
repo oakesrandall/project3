@@ -18,7 +18,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use(foodr);
+app.use(foodrRouter);
 
 let template = readFileSync(join(__dirname, '..', 'dist', 'index.html')).toString();
 
