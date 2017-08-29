@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { ImageComponent } from './image/image.component';
 import { FormsModule } from '@angular/forms';
 import { ApiKeyService } from './apikey.service';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImageComponent
+    ImageComponent,
+    AboutComponent
     
     
   ],
