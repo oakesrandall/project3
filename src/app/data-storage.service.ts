@@ -12,6 +12,7 @@ export class DataService {
 	constructor(private http: Http) { }
 
 	storeUser(newUser) {
+		console.log("sending user data to backend");
 		this.http.post(`${this.baseUrl}/api/users/`, newUser);
 
 	}
