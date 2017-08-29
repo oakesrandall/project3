@@ -4,6 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
 import { AppComponent } from './app.component';
 import { ImageComponent } from './image/image.component';
+import { AboutComponent } from './about/about.component';
+import { LandingComponent } from './landing/landing.component';
 import { FormsModule } from '@angular/forms';
 import { ApiKeyService } from './apikey.service';
 import { FavoritesComponent } from './favorites/favorites.component';
