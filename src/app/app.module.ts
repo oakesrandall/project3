@@ -12,6 +12,13 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
+
+export class MyHammerConfig extends HammerGestureConfig  {
+  overrides = <any>{
+      'swipe': {velocity: 0.4, threshold: 20}
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,13 +31,9 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [AuthService, ApiKeyService],
+  providers: [AuthService, ApiKeyService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-export class MyHammerConfig extends HammerGestureConfig  {
-  overrides = <any>{
-      'swipe': {velocity: 0.4, threshold: 20}
-  };
-}
+
