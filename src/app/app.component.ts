@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as firebase from 'firebase';
 import { ApiKeyService } from './apikey.service';
+//import { AngularFireModule } from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,15 @@ import { ApiKeyService } from './apikey.service';
 })
 export class AppComponent {
 
-	constructor(
-      private apiKeyService: ApiKeyService
-    ) { }
+	constructor(private apiKeyService: ApiKeyService) { }
 
 	ngOnInit() {
-    console.log(this.apiKeyService.apiKey);
-    console.log(this.apiKeyService.authDomain);
+    console.log(this.apiKeyService.firebaseApiKey);
 		firebase.initializeApp({
-  			apiKey: this.apiKeyService.apiKey,
-  			authDomain: this.apiKeyService.authDomain
-  		})
+      apiKey: this.apiKeyService.firebaseApiKey,
+      authDomain: this.apiKeyService.firebaseAuthDomain
+    });
+
 	}
   
 }

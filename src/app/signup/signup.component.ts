@@ -2,41 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import {  NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-
+import { DataService } from '../data-storage.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  //signupForm: FormGroup;
+  
+  newUser = <any>{};
 
   constructor(
-      private authService: AuthService
-    ) { }
+      private authService: AuthService,
+      private dataService: DataService
+   ) { }
 
   ngOnInit() {
   }
 
-  onSignup(form: NgForm) {
+  onSignup(newUser) {
     
-    console.log("onSignup clicked");
-  	const email = form.value.email;
-  	const password = form.value.password;
+    console.log(newUser);
+  	const email = newUser.email;
+  	const password = newUser.password;
     console.log(email);
     console.log(password);
     this.authService.signupUser(email, password);
+    console.log(newUser);
+    this.dataService.storeUser(newUser);
   }
 
-  // initForm() {
-  //   let newUsername = '';
-  //   let newPassword = '';
-
-  //   this.signupForm = new FormGroup({
-  //     'username': new FormControl(newUsername),
-  //     'password': new FormControl(newPassword)
-  //   })
-
-  // }
 
 }
