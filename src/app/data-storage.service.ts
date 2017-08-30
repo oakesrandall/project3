@@ -7,5 +7,13 @@ import { Router } from '@angular/router';
 @Injectable()
 export class DataService {
 
-	
+	baseUrl = 'http://localhost:3000';
+
+	constructor(private http: Http) { }
+
+	storeUser(newUser) {
+		console.log("sending user data to backend");
+		this.http.post(`${this.baseUrl}/api/users/`, newUser);
+
+	}
 }

@@ -10,8 +10,7 @@ export class FavoritesComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-  	var email = this.authService.email
-  	console.log(email);
+  	
   }
 
 }

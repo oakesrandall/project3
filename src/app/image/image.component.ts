@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-image',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.css']
 })
+
 export class ImageComponent implements OnInit {
 
   myKey: any = 'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M';
@@ -73,6 +75,23 @@ export class ImageComponent implements OnInit {
   
 
   constructor(private http: Http) { }
+  
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
+  swipe(action = this.SWIPE_ACTION.RIGHT) {
+    if (action === this.SWIPE_ACTION.LEFT) {
+      console.log('swiped left');
+    } else if (action === this.SWIPE_ACTION.RIGHT) {
+      console.log('swiped right');
+    }
+  }
+
+  clickYes() {
+    console.log('clicked yes');
+  }
+
+  clickNo() {
+    console.log('clicked no');
+  }
 
   ngOnInit() {
   	console.log('ngOnInit hit');
