@@ -5,6 +5,7 @@ import { Favorite } from './favorites.model';
 
 @Injectable() 
 export class FavoritesService {
+
 	baseUrl = 'http://localhost:3000';
 	
 	favoritesChanged = new Subject<Favorite[]>();
@@ -19,6 +20,7 @@ export class FavoritesService {
 	getFavorites() {
 		return this.favorites.slice();
 	}
+
 
 	addFavorites(favorite: Favorite) {
 		this.favorites.push(favorite);
