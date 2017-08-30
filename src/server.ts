@@ -1,3 +1,4 @@
+
 // import 'reflect-metadata';
 // import 'zone.js/dist/zone-node';
 // import { platformServer, renderModuleFactory } from '@angular/platform-server'
@@ -7,6 +8,7 @@
 // import * as bodyParser from 'body-parser';
 // import { readFileSync } from 'fs';
 // import { join } from 'path';
+
 
 // import { router as foodrRouter } from './config/routes';
 
@@ -20,14 +22,17 @@
 
 // app.use(foodrRouter);
 
-// let template = readFileSync(join(__dirname, '..', 'dist', 'index.html')).toString();
-
 // app.engine('html', (_, options, callback) => {
 //   const opts = { document: template, url: options.req.url };
+
+
+  // renderModuleFactory(AppServerModuleNgFactory, opts)
+  //   .then(html => callback(null, html));
 
 //   renderModuleFactory(AppServerModuleNgFactory, opts)
 //     .then(html => callback(null, html));
 // });
+
 
 // app.set('view engine', 'html');
 // app.set('views', 'src')

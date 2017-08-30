@@ -16,7 +16,8 @@ import { DataService } from './data-storage.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FavoriteItemComponent } from './favorite-item/favorite-item.component';
+import { FavoritesService } from './favorites.service';
 
 
 export class MyHammerConfig extends HammerGestureConfig  {
@@ -33,9 +34,10 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AboutComponent,
     FavoritesComponent,
     HeaderComponent,
+    FavoriteItemComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'cli-universal-demo'}),
     AppRoutingModule,
     FormsModule,
     HttpModule,
@@ -45,6 +47,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
 
   ],
   providers: [
+    FavoritesService,
     AuthService,
     ApiKeyService,
     DataService,
