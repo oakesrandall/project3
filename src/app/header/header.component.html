@@ -24,6 +24,11 @@
 		      <li><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 		      <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ng-template>
+        <li><a
+          style="cursor: pointer;"
+          (click)="onLogout()"
+          *ngIf="authService.isAuthenticated()">Logout</a>
+        </li>
     	</ul>
     </div>
   </div>

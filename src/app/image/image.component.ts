@@ -76,7 +76,6 @@ export class ImageComponent implements OnInit {
 		// 	});
 		// });
   
-
   constructor(private http: Http) { }
   
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
