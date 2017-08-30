@@ -11,7 +11,8 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 
 export class ImageComponent implements OnInit {
 
-  myKey: any = 'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M';
+  myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
+  //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
   restaurantArray: any = [];
   myLat: any = '39.758451';
   myLng: any = '-105.00762450000002';
@@ -45,16 +46,18 @@ export class ImageComponent implements OnInit {
 		})
 	}
 
-
-  getRestaurantDetails() {
-  	console.log('this is the google places api call - details');
-		this.restaurantArray.forEach(restaurant => {
-			return this.http.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey, this.options) 
-			.toPromise()
-			.then(response => {
-				console.log("heeeere");
-			})
-		})
+   getRestaurantDetails() {
+   	console.log('this is the google places api call - details');
+	 	this.restaurantArray.forEach(restaurant => {
+	 		console.log(restaurant);
+	 		return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
+	 		.toPromise()
+	 		.then(response => {
+	 			console.log(response);
+	 			this.results = response.json().result;
+	 			console.log(this.results);
+	 		})
+	 	})
 	}
 		// 		console.log('error:', error); // Print the error if one occurred 
 		// 		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
