@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { Favorite } from '../favorites.model';
+import { FavoritesService } from '../favorites.service';
 
 @Component({
   selector: 'app-image',
@@ -14,6 +16,7 @@ export class ImageComponent implements OnInit {
   myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
   //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
   restaurantArray: any = [];
+  restaurantObjectsForPassingArray: any = [];
   myLat: any = '39.758451';
   myLng: any = '-105.00762450000002';
   googlePlacesNearbyAPIurl: any = 'https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
@@ -49,34 +52,33 @@ export class ImageComponent implements OnInit {
    getRestaurantDetails() {
    	console.log('this is the google places api call - details');
 	 	this.restaurantArray.forEach(restaurant => {
-	 		console.log(restaurant);
+	 		//console.log(restaurant);
 	 		return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
 	 		.toPromise()
 	 		.then(response => {
 	 			//console.log(response);
 	 			this.results = response.json().result;
-	 			console.log(this.results);
-	 		})
-	 	})
-	}
-	 	
-		// 		console.log('error:', error); // Print the error if one occurred 
-		// 		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
-		// 		//console.log('body:', body); // Print the response body
-		// 		let parsedData = JSON.parse(body);
-		// 		console.log(parsedData.result.name);
-		// 		console.log(parsedData.result.formatted_address);
-		// 		console.log(parsedData.result.geometry.location.lat);
-		// 		console.log(parsedData.result.geometry.location.lng);
-		// 		console.log(parsedData.result.website);
-		// 		for (let i in parsedData.result.photos) {
-		// 			if (parsedData.result.photos[i].photo_reference) {
-		// 				console.log('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + parsedData.result.photos[i].photo_reference + '&key=' + this.myKey);
-		// 			}
-		// 		}
-		// 	});
-		// });
-  
+	 			let tempArray = [];
+	 			let restaurantObject = {
+	 				name: this.results.name,
+	 				address: this.results.formatted_address,
+	 				lat: this.results.geometry.location.lat,
+	 				lng: this.results.geometry.location.lng,
+	 				websiteURL: this.results.website,
+	 				photos: [],
+	 			};
+	 			for (let i in this.results.photos) {
+	 				if (this.results.photos[i].photo_reference) {
+	 					tempArray.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=' + this.results.photos[i].photo_reference + '&key=' + this.myKey);
+	 				}
+	 			}
+	 			restaurantObject.photos = tempArray;
+	 			//console.log(restaurantObject.photos);
+	 			this.restaurantObjectsForPassingArray.push(restaurantObject);
+	 		});
+	 	});
+	 	console.log(this.restaurantObjectsForPassingArray);
+	}  
 
   constructor(private http: Http) { }
   

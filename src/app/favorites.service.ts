@@ -19,6 +19,10 @@ export class FavoritesService {
 		return this.favorites.slice();
 	}
 
+	getRestaurants() {
+		
+	}
+
 	addFavorites(favorite: Favorite) {
 		this.favorites.push(favorite);
 		this.favoritesChanged.next(this.favorites.slice());
