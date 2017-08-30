@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
-import { platformServer, renderModuleFactory } from '@angular/platform-server'
-import { enableProdMode } from '@angular/core'
-import { AppServerModuleNgFactory } from '../dist/ngfactory/src/app/app-server-module.ngfactory'
+//import { platformServer, renderModuleFactory } from '@angular/platform-server';
+import { enableProdMode } from '@angular/core';
+//import { AppServerModuleNgFactory } from '../dist/ngfactory/src/app/app-server-module.ngfactory';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { readFileSync } from 'fs';
@@ -20,13 +20,13 @@ app.use(bodyParser.json());
 
 app.use(foodrRouter);
 
-let template = readFileSync(join(__dirname, '..', 'dist', 'index.html')).toString();
+let template = readFileSync(join(__dirname, '..', 'src', 'index.html')).toString();
 
 app.engine('html', (_, options, callback) => {
   const opts = { document: template, url: options.req.url };
 
-  renderModuleFactory(AppServerModuleNgFactory, opts)
-    .then(html => callback(null, html));
+  // renderModuleFactory(AppServerModuleNgFactory, opts)
+  //   .then(html => callback(null, html));
 });
 
 app.set('view engine', 'html');
