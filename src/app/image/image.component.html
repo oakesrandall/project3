@@ -9,12 +9,17 @@
     </div>  
         <div class="row justify-content-center">
             <div>
-                <div class="col-sm-6">
-                    <button class="center-block">No, thanks</button>
+                <div class="col-sm-6"
+                (click)="clickNo()">
+                    <button class="center-block hidden-xs btn-lrg">No, thanks</button>
                 </div>
-                <div class="col-sm-6">
-                    <button class="center-block">I'd eat that</button>
+                <div class="col-sm-6"
+                (click)="clickYes()">
+                    <button class="center-block hidden-xs btn-lrg">I'd eat that</button>
                 </div>
+            </div>
+            <div class="col-sm-6">
+                <button class="center-block" (click)="getRestaurants">Get Restaurants</button>
             </div>
         </div>
 </div>

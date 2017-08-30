@@ -30,7 +30,7 @@ export class AuthService {
 					email = response.email;
 
 					console.log(response.email);
-					this.router.navigate(['/']);
+					this.router.navigate(['/home']);
 					firebase.auth().currentUser.getToken()
 						.then(
 							(token: string) => this.token = token)
@@ -48,7 +48,7 @@ export class AuthService {
 			);
 			// need to call data service to get user info
 
-			this.router.navigate(['']);
+			
 			return this.token;
 	}
 
@@ -59,6 +59,7 @@ export class AuthService {
 	// logout 
 	logout() {
 		firebase.auth().signOut();
+		this.router.navigate(['']);
 		this.token = null;
 	}
 }
