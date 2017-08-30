@@ -17,6 +17,14 @@ export class ImageComponent implements OnInit {
     }
   }
 
+  clickYes() {
+    console.log('clicked yes');
+  }
+
+  clickNo() {
+    console.log('clicked no');
+  }
+
   ngOnInit() {
   }
 
