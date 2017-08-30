@@ -53,12 +53,13 @@ export class ImageComponent implements OnInit {
 	 		return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
 	 		.toPromise()
 	 		.then(response => {
-	 			console.log(response);
+	 			//console.log(response);
 	 			this.results = response.json().result;
 	 			console.log(this.results);
 	 		})
 	 	})
 	}
+	 	
 		// 		console.log('error:', error); // Print the error if one occurred 
 		// 		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
 		// 		//console.log('body:', body); // Print the response body

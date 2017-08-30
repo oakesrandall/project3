@@ -1,3 +1,8 @@
-<p>
-  favorites works!
-</p>
+
+<div class="row">
+  <div class="col-xs-12">
+	<app-favorite-item *ngFor="let favoriteElement of favorites; let i = index" 
+	[favorite]="favoriteElement"
+	[index]="i"></app-favorite-item>
+  </div>
+</div>
