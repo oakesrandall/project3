@@ -6,8 +6,11 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.css']
 })
+
 export class ImageComponent implements OnInit {
 
+  constructor() { }
+  
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
   swipe(action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.LEFT) {
@@ -17,7 +20,6 @@ export class ImageComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
