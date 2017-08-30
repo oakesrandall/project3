@@ -1,4 +1,3 @@
-
 import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
 import { platformServer, renderModuleFactory } from '@angular/platform-server'
@@ -35,4 +34,3 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`listening on http://localhost:${PORT}!`);
 });
-

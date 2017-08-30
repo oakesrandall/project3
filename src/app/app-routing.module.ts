@@ -4,12 +4,17 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ImageComponent } from './image/image.component';
+import { LandingComponent } from './landing/landing.component';
 import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
 	{
 		path: '',
+		component: LandingComponent
+	},
+	{
+		path: 'home',
 		component: ImageComponent
 	},
 	{
