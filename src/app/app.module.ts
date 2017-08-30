@@ -34,6 +34,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AboutComponent,
     FavoritesComponent,
     HeaderComponent,
+    LandingComponent,
     FavoriteItemComponent,
   ],
   imports: [
