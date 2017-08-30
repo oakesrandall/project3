@@ -45,7 +45,6 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AngularFireModule,
     AngularFireAuthModule
     // BrowserAnimationsModule
-
   ],
   providers: [
     FavoritesService,
