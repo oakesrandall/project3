@@ -78,7 +78,7 @@ export class ImageComponent implements OnInit {
 	 		});
 	 	});
 	 	console.log(this.restaurantObjectsForPassingArray);
-	}  
+	}
 
   constructor(private http: Http) { }
   
