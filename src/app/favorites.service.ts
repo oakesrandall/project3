@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-
+import { Http } from '@angular/http';
 import { Favorite } from './favorites.model';
 
 @Injectable() 
 export class FavoritesService {
-
+	baseUrl = 'http://localhost:3000';
+	
 	favoritesChanged = new Subject<Favorite[]>();
 
 	private favorites: Favorite[] = [

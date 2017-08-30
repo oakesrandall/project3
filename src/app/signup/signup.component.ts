@@ -11,6 +11,7 @@ import { DataService } from '../data-storage.service';
 export class SignupComponent implements OnInit {
   
   newUser = <any>{};
+  photo: string;
 
   constructor(
       private authService: AuthService,
@@ -18,6 +19,7 @@ export class SignupComponent implements OnInit {
    ) { }
 
   ngOnInit() {
+    this.photo = "/assets/images/pexels-photo-66639.jpeg";
   }
 
   onSignup(newUser) {
