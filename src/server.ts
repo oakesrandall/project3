@@ -2,23 +2,16 @@ import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
 import { platformServer, renderModuleFactory } from '@angular/platform-server'
 import { enableProdMode } from '@angular/core'
-import { AppServerModuleNgFactory } from '../dist/ngfactory/src/app/app-server-module.ngfactory'
+import { AppServerModuleNgFactory } from '../dist/ngfactory/src/app/app.server.module.ngfactory'
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { router as foodrRouter } from './config/routes';
-
-const PORT = 3000;
+const PORT = 4000;
 
 enableProdMode();
 
 const app = express();
-
-app.use(bodyParser.json());
-
-app.use(foodrRouter);
 
 let template = readFileSync(join(__dirname, '..', 'dist', 'index.html')).toString();
 
@@ -38,6 +31,6 @@ app.get('*', (req, res) => {
   res.render('index', { req });
 });
 
-app.listen(process.env.PORT || PORT, () => {
-  console.log(`Express server is up`);
+app.listen(PORT, () => {
+  console.log(`listening on http://localhost:${PORT}!`);
 });
