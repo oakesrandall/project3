@@ -31,9 +31,10 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AboutComponent,
     FavoritesComponent,
     HeaderComponent,
+    LandingComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'cli-universal-demo'}),
     AppRoutingModule,
     FormsModule,
     HttpModule
