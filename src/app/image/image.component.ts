@@ -95,7 +95,7 @@ export class ImageComponent implements OnInit {
 
   ngOnInit() {
   	console.log('ngOnInit hit');
-  	this.getRestaurants();
+  	//this.getRestaurants();
   }
 
 }
