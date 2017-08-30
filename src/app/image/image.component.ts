@@ -49,7 +49,7 @@ export class ImageComponent implements OnInit {
   getRestaurantDetails() {
   	console.log('this is the google places api call - details');
 		this.restaurantArray.forEach(restaurant => {
-			return this.http.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey, this.options) 
+			return this.http.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
 			.toPromise()
 			.then(response => {
 				console.log("heeeere");
