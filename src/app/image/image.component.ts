@@ -13,7 +13,8 @@ export class ImageComponent implements OnInit {
   restaurantArray: any = [];
   myLat: any = '39.758451';
   myLng: any = '-105.00762450000002';
-  apiURL: any = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
+  googlePlacesNearbyAPIurl: any = 'https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
+  //googlePlacesDetailsAPIurl: any = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey;
   results;
   public headers = new Headers({ 
   	'Content-Type': 'application/json', 
@@ -21,67 +22,61 @@ export class ImageComponent implements OnInit {
  });
 	public options = new RequestOptions({ headers: this.headers });
 
-  findCharacter() {
-  	console.log(this.apiURL);
-  	console.log(this.options);
-		return this.http.get(this.apiURL, this.options)
+  getRestaurants() {
+  	console.log('this is the google places api call - nearby');
+  	//console.log(this.googlePlacesNearbyAPIurl);
+  	//console.log(this.options);
+		return this.http.get(this.googlePlacesNearbyAPIurl, this.options)
 		.toPromise()
 		.then(response => {
-			console.log("heeeere");
+			//console.log("heeeere");
 			this.results = response.json().results;
 		})
 		.then(response => {
-			console.log("whwaaaat");
-			console.log(this.results);
-		});
+			this.results.forEach(restaurant => {
+				//console.log(restaurant.place_id);
+				//console.log(this.restaurantArray);
+				this.restaurantArray.push(restaurant.place_id);
+			})
+			console.log(this.restaurantArray);
+			this.getRestaurantDetails();
+		})
 	}
 
-  // getRestaurants() {
-  // 	console.log('this is the google places api call - nearby');
-  // 	console.log(this.apiURL);
-  // 	this.http.get(this.apiURL, function(error, response, body)
-  // 	.toPromise()
-  // 	.then(response => this.)
-  // 	 {
-  // 		console.log('error:', error); // Print the error if one occurred 
-		// 	console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
-		// 	//console.log('body:', body); // Print the response body
-		// 	let parsedData = JSON.parse(body);
-		// 	parsedData.results.forEach(function(restaurant) {
-		// 		this.restaurantArray.push(restaurant.place_id);
-		// 	});
-		// 	this.getRestaurantDetails();
-  // 	});
-  // }
 
   getRestaurantDetails() {
   	console.log('this is the google places api call - details');
-		this.restaurantArray.forEach(function(restaurant) {
-			this.http.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, function(error, response, body) {
-				console.log('error:', error); // Print the error if one occurred 
-				console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
-				//console.log('body:', body); // Print the response body
-				let parsedData = JSON.parse(body);
-				console.log(parsedData.result.name);
-				console.log(parsedData.result.formatted_address);
-				console.log(parsedData.result.geometry.location.lat);
-				console.log(parsedData.result.geometry.location.lng);
-				console.log(parsedData.result.website);
-				for (let i in parsedData.result.photos) {
-					if (parsedData.result.photos[i].photo_reference) {
-						console.log('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + parsedData.result.photos[i].photo_reference + '&key=' + this.myKey);
-					}
-				}
-			});
-		});
-  }
+		this.restaurantArray.forEach(restaurant => {
+			return this.http.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey, this.options) 
+			.toPromise()
+			.then(response => {
+				console.log("heeeere");
+			})
+		})
+	}
+		// 		console.log('error:', error); // Print the error if one occurred 
+		// 		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+		// 		//console.log('body:', body); // Print the response body
+		// 		let parsedData = JSON.parse(body);
+		// 		console.log(parsedData.result.name);
+		// 		console.log(parsedData.result.formatted_address);
+		// 		console.log(parsedData.result.geometry.location.lat);
+		// 		console.log(parsedData.result.geometry.location.lng);
+		// 		console.log(parsedData.result.website);
+		// 		for (let i in parsedData.result.photos) {
+		// 			if (parsedData.result.photos[i].photo_reference) {
+		// 				console.log('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + parsedData.result.photos[i].photo_reference + '&key=' + this.myKey);
+		// 			}
+		// 		}
+		// 	});
+		// });
+  
 
   constructor(private http: Http) { }
 
   ngOnInit() {
-  	console.log('something');
-  	//this.getRestaurants();
-  	this.findCharacter();
+  	console.log('ngOnInit hit');
+  	this.getRestaurants();
   }
 
 }
