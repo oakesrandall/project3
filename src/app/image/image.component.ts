@@ -12,7 +12,7 @@ import { FavoritesService } from '../favorites.service';
 })
 
 export class ImageComponent implements OnInit {
-
+	currentImage: any = './assets/images/loading_burger.gif';
   myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
   //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
   restaurantArray: any = [];
@@ -69,7 +69,7 @@ export class ImageComponent implements OnInit {
 	 			};
 	 			for (let i in this.results.photos) {
 	 				if (this.results.photos[i].photo_reference) {
-	 					tempArray.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=' + this.results.photos[i].photo_reference + '&key=' + this.myKey);
+						tempArray.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=' + this.results.photos[i].photo_reference + '&key=' + this.myKey);
 	 				}
 	 			}
 	 			restaurantObject.photos = tempArray;
@@ -77,7 +77,11 @@ export class ImageComponent implements OnInit {
 	 			this.restaurantObjectsForPassingArray.push(restaurantObject);
 	 		});
 	 	});
-	 	console.log(this.restaurantObjectsForPassingArray);
+		 console.log(this.restaurantObjectsForPassingArray);
+		 console.log(this.currentImage);
+		 
+			 this.getImage();
+		 
 	}
 
   constructor(private http: Http) { }
@@ -85,23 +89,40 @@ export class ImageComponent implements OnInit {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
   swipe(action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.LEFT) {
-      console.log('swiped left');
+			console.log('swiped left');
+			this.imageCounter ++;
+			this.getImage();
     } else if (action === this.SWIPE_ACTION.RIGHT) {
-      console.log('swiped right');
+			console.log('swiped right')
+			this.imageCounter ++;
+			this.getImage();
     }
   }
 
   clickYes() {
-    console.log('clicked yes');
+		console.log('clicked yes');
+		this.imageCounter ++;
+		this.getImage();
   }
 
   clickNo() {
-    console.log('clicked no');
-  }
+		console.log('clicked no');
+		this.imageCounter ++;
+		this.getImage();
+	}
+	imageCounter: number = 0;
+	
+	getImage() {
+		console.log('image counter: ', this.imageCounter);
+		if (this.imageCounter < this.restaurantObjectsForPassingArray[1].photos.length -1) {
+			this.currentImage = this.restaurantObjectsForPassingArray[1].photos[this.imageCounter];
+		}
+	}
 
   ngOnInit() {
   	console.log('ngOnInit hit');
-  	this.getRestaurants();
+		this.getRestaurants();
+		
   }
 
 }

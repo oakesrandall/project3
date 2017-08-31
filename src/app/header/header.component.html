@@ -16,9 +16,12 @@
         <ng-template [ngIf]="authService.isAuthenticated()">
           <li routerLinkActive="active"><a routerLink="/home">Home</a>
           </li>
-          <li>
-            <a routerLink="/favorites">Favorites</a>
-          </li>
+				<li>
+					<a routerLink="/favorites">Favorites</a>
+				</li>
+        <li>
+          <a routerLink="/about">About</a>
+        </li>
         </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
