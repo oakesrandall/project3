@@ -19,17 +19,31 @@ export class ImageComponent implements OnInit {
   subscription: Subscription;
 
   currentImage: any = './assets/images/loading_burger.gif';
+    
+    // google api key
     myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
     imageCounter: number = 0;
     arrayCounter: number = 0;
+    
+    // extra google api keys for heavy testing
     //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
     //'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o'
+    
+    // empty array to push place ids to from the first api call
     restaurantArray: any = [];
+    
+    // empty array to push the built restaurant objects
     restaurantObjectsForPassingArray: any = [];
+    
+    // defining lat and long as variables so that hopefully they can updated on the fly with geolocation
     myLat: any = '39.758451';
     myLng: any = '-105.00762450000002';
+    
+    // defining api request url as variable to drop in later
     googlePlacesNearbyAPIurl: any = 'https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
     //googlePlacesDetailsAPIurl: any = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey;
+    
+    // declaring results
     results;
     public headers = new Headers({ 
     'Content-Type': 'application/json', 
@@ -37,6 +51,7 @@ export class ImageComponent implements OnInit {
 });
 	public options = new RequestOptions({ headers: this.headers });
 
+    // this is the first api call to collect the placeids of the 20 closest restaurants
     getRestaurants() {
         console.log('this is the google places api call - nearby');
     return this.http.get(this.googlePlacesNearbyAPIurl, this.options)
@@ -46,21 +61,26 @@ export class ImageComponent implements OnInit {
     })
     .then(response => {
       this.results.forEach(restaurant => {
+        // push those results to that empty array from above
         this.restaurantArray.push(restaurant.place_id);
       })
       console.log(this.restaurantArray);
+      // trigger the next api call function
       this.getRestaurantDetails();
     })
   }
 
+// this is the second api call to collect place details and arrays of photos based on place ids
 getRestaurantDetails() {
          console.log('this is the google places api call - details');
+     // this will have to happen for each place id
      this.restaurantArray.forEach(restaurant => {
        return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
        .toPromise()
        .then(response => {
          this.results = response.json().result;
          let tempArray = [];
+         // build the objects that will eventually be passed for use rendering images and saving businesses to the database
          let restaurantObject = {
            name: this.results.name,
            address: this.results.formatted_address,
@@ -70,12 +90,14 @@ getRestaurantDetails() {
            photos: [],
          };
          for (let i in this.results.photos) {
+           // this works whether there is 1, 10, or no photos
            if (this.results.photos[i].photo_reference) {
             tempArray.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=' + this.results.photos[i].photo_reference + '&key=' + this.myKey);
            }
          }
          restaurantObject.photos = tempArray;
          //console.log(restaurantObject.photos);
+         // this is the array of restaurants with all the details and photos
          this.restaurantObjectsForPassingArray.push(restaurantObject);
        });
      });
@@ -146,6 +168,7 @@ getRestaurantDetails() {
   		);
     	this.favorites = this.favoriteService.getFavorites();
     	console.log('ngOnInit hit');
+      // on init, getRestaurants is triggered, setting the whole thing in motion
       this.getRestaurants();
   }
 }
