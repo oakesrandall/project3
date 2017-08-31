@@ -3,21 +3,36 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import  { DataService } from '../data-storage.service';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
+import { ApiKeyService } from '../apikey.service';
+import { FirebaseService } from '../firebase.service';
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  subscription: Subscription;
+  message: any;
   photo: string;
 
-  constructor(private authService: AuthService,
+  constructor(
+              private firebaseService: FirebaseService,
+              private authService: AuthService,
               private dataService: DataService,
-              private router: Router) { }
+              private apiKeyService: ApiKeyService,
+              private router: Router) { 
+     this.subscription = this.firebaseService.startFirebase().subscribe(
+         message => {
+           this.message = message;
+     });
+  }
 
   ngOnInit() {
-    this.photo = "/assets/images/meat-vegetables-gemuesepiess-mushrooms-111131.jpeg";
+    
+    this.photo = "/assets/images/suit-business-man-business-man-37547.jpeg";
   	
   }
 

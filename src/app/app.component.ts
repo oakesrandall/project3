@@ -29,10 +29,7 @@ export class AppComponent {
   }
 	ngOnInit() {
     
-		firebase.initializeApp({
-      apiKey: this.apiKeyService.firebaseApiKey,
-      authDomain: this.apiKeyService.firebaseAuthDomain
-    });
+		
     //this.getLocation()
 
 	}
