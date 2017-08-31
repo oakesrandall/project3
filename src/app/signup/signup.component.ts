@@ -3,6 +3,7 @@ import {  NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '../data-storage.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',

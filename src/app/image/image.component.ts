@@ -4,6 +4,8 @@ import 'rxjs/add/operator/toPromise';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { Favorite } from '../favorites.model';
 import { FavoritesService } from '../favorites.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-image',
@@ -12,6 +14,22 @@ import { FavoritesService } from '../favorites.service';
 })
 
 export class ImageComponent implements OnInit {
+
+  favorites: Favorite[]; 
+  subscription: Subscription;
+
+  currentImage: any = './assets/images/loading_burger.gif';
+  myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
+  //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
+  restaurantArray: any = [];
+  restaurantObjectsForPassingArray: any = [];
+  myLat: any = '39.758451';
+  myLng: any = '-105.00762450000002';
+  googlePlacesNearbyAPIurl: any = 'https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
+  //googlePlacesDetailsAPIurl: any = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey;
+  results;
+  public headers = new Headers({ 
+
     currentImage: any = './assets/images/loading_burger.gif';
     myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
     imageCounter: number = 0;
@@ -75,7 +93,13 @@ export class ImageComponent implements OnInit {
         console.log(this.restaurantObjectsForPassingArray);
 	}
 
-    constructor(private http: Http) { }
+
+  constructor(private http: Http,
+  			 private route: ActivatedRoute,
+  			 private router: Router,
+  			 private favoriteService: FavoritesService
+  ) { }
+
   
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
     swipe(action) {
@@ -122,6 +146,17 @@ export class ImageComponent implements OnInit {
         }
 	}
 
+
+  ngOnInit() {
+  	this.subscription = this.favoriteService.favoritesChanged
+  		.subscribe(
+  			(favorites: Favorite[]) => {
+  				this.favorites = favorites;
+  			}
+  		);
+  	this.favorites = this.favoriteService.getFavorites();
+  	console.log('ngOnInit hit');
+
     setImage() {
         if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
             console.log('image has data, setting image');
@@ -134,6 +169,7 @@ export class ImageComponent implements OnInit {
 
     ngOnInit() {
   	    console.log('ngOnInit hit');
+
 		this.getRestaurants();
 		
   }
