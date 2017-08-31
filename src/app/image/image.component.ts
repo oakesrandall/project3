@@ -23,6 +23,7 @@ export class ImageComponent implements OnInit {
     imageCounter: number = 0;
     arrayCounter: number = 0;
     //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
+    //'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o'
     restaurantArray: any = [];
     restaurantObjectsForPassingArray: any = [];
     myLat: any = '39.758451';
