@@ -5,6 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ImageComponent } from './image/image.component';
 import { LandingComponent } from './landing/landing.component';
+import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 
@@ -33,7 +34,6 @@ const routes: Routes = [
 		path: 'about',
 		component: AboutComponent
 	}
-
 ];
 
 @NgModule({
