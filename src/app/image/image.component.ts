@@ -90,17 +90,12 @@ getRestaurantDetails() {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
     swipe(action) {
         if (action === this.SWIPE_ACTION.LEFT) {
-      console.log('swiped left');
-            this.imageCounter ++;
-      this.getImage();
+			console.log('swiped left');
+			this.getImage();
             
     } else if (action === this.SWIPE_ACTION.RIGHT) {
-      console.log('swiped right')
-      if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
-                console.log('restaurantArray is not done, increasing imageCounter');
-                this.arrayCounter++;
-            }
-      this.getImage();
+			console.log('swiped right')
+			this.getImage();
     }
   }
 
@@ -111,15 +106,12 @@ getRestaurantDetails() {
   }
 
     clickNo() {
-    console.log('clicked no');
-    this.imageCounter ++;
-    this.getImage();
-  }
-
+		console.log('clicked no');
+		this.getImage();
+	}
   notFood() {
         console.log('clicked not food');
     }
-
   getImage() {
     console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
         console.log('array counter: ', this.arrayCounter);
