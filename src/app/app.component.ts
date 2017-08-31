@@ -33,7 +33,7 @@ export class AppComponent {
       apiKey: this.apiKeyService.firebaseApiKey,
       authDomain: this.apiKeyService.firebaseAuthDomain
     });
-    this.getLocation()
+    //this.getLocation()
 
 	}
 

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse bg-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a href="#" class="navbar-brand">App Title</a>
+      <a href="#" class="navbar-brand">Foodr</a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 
       	<span class="icon-bar"></span>
@@ -12,27 +12,26 @@
     </div>
 
     <div class="collapse navbar-collapse" id="myNavbar">
-    	<ul class="nav navbar-nav">
+      <ul class="nav navbar-nav">
         <ng-template [ngIf]="authService.isAuthenticated()">
-    			<li routerLinkActive="active"><a routerLink="/home">Home</a>
+          <li routerLinkActive="active"><a routerLink="/home">Home</a>
           </li>
 				<li>
 					<a routerLink="/favorites">Favorites</a>
 				</li>
-        </ng-template>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-        <ng-template [ngIf]="!authService.isAuthenticated()">
-		      <li><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-		      <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ng-template>
-        <li><a
-          style="cursor: pointer;"
-          (click)="onLogout()"
-          *ngIf="authService.isAuthenticated()">Logout</a>
+        <li>
+          <a routerLink="/about">About</a>
         </li>
-    	</ul>
+        </ng-template>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ng-template>
+        <li><a style="cursor: pointer;" (click)="onLogout()" *ngIf="authService.isAuthenticated()">Logout</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
-      
