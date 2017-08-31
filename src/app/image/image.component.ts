@@ -90,53 +90,32 @@ getRestaurantDetails() {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
     swipe(action) {
         if (action === this.SWIPE_ACTION.LEFT) {
-<<<<<<< HEAD
-			console.log('swiped left');
-			this.getImage();
+			  console.log('swiped left');
+			  this.getImage();
             
-    } else if (action === this.SWIPE_ACTION.RIGHT) {
-			console.log('swiped right')
-			this.getImage();
-=======
-      console.log('swiped left');
-            this.imageCounter ++;
-      this.getImage();
-            
-    } else if (action === this.SWIPE_ACTION.RIGHT) {
-      console.log('swiped right')
-      if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
-                console.log('restaurantArray is not done, increasing imageCounter');
-                this.arrayCounter++;
-            }
-      this.getImage();
->>>>>>> 2b2db21a8365b252d0e42151c10c5650e64cef7d
-    }
+        } else if (action === this.SWIPE_ACTION.RIGHT) {
+			  console.log('swiped right')
+			  this.getImage();
+        }
   }
 
 
     clickYes() {
-    console.log('clicked yes');
-    this.getImage();
-  }
+        console.log('clicked yes');
+        this.getImage();
+    }
 
     clickNo() {
-<<<<<<< HEAD
 		console.log('clicked no');
 		this.getImage();
 	}
-=======
-    console.log('clicked no');
-    this.imageCounter ++;
-    this.getImage();
-  }
->>>>>>> 2b2db21a8365b252d0e42151c10c5650e64cef7d
 
-  notFood() {
+    notFood() {
         console.log('clicked not food');
     }
-
-  getImage() {
-    console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
+  
+    getImage() {
+        console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
         console.log('array counter: ', this.arrayCounter);
         if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
             this.arrayCounter++;
@@ -146,7 +125,7 @@ getRestaurantDetails() {
             this.arrayCounter = 0;
             this.setImage();
         }
-  }
+    }
 
   setImage() {
         if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
@@ -159,16 +138,15 @@ getRestaurantDetails() {
     }
 
 
-  ngOnInit() {
-  	this.subscription = this.favoriteService.favoritesChanged
+    ngOnInit() {
+  	    this.subscription = this.favoriteService.favoritesChanged
   		.subscribe(
-  			(favorites: Favorite[]) => {
-  				this.favorites = favorites;
-  			}
-  		);
+  			(favorites: Favorite[]) => 
+              { this.favorites = favorites; }
+  		    );
     	this.favorites = this.favoriteService.getFavorites();
     	console.log('ngOnInit hit');
-      this.getRestaurants();
+        this.getRestaurants();
   }
 }
 
