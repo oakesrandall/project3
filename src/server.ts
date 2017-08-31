@@ -33,6 +33,7 @@ app.set('views', 'src')
 app.get('*.*', express.static(join(__dirname, '..', 'dist')));
 
 app.get('*', (req, res) => {
+  
   res.render('index', { req });
 });
 

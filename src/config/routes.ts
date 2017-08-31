@@ -6,6 +6,7 @@ import { restaurantsController } from '../controllers/restaurants';
 //User Routes
 
 // index
+
 router.get('/api/users', usersController.index);
 
 // create

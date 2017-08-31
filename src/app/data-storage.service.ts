@@ -13,13 +13,14 @@ export class DataService {
 	storeUser(email) {
 		console.log("sending user data to backend");
 		
-		this.http.post(`${this.baseUrl}/api/users/`, email);
+		this.http.post(`${this.baseUrl}/users/`, email);
 
 	}
 	//${uid}
 	getUser(uid) {
 		console.log("the user id is" + uid);
 		console.log("sending user data to backend");
+
 		this.http.get(`${this.baseUrl}/api/users/${uid}`);
 	}
 
