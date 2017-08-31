@@ -11,15 +11,23 @@ function index(req, res) {
 
 function show(req, res) {
 	console.log('getting user');
+	// User.findAll().then(function(users) {
+	// 	res.json(users);
+	// });
+	res.send("index");
+}
+
+function show(req, res) {
+	res.send("show");
 }
 
 function create(req, res) {
 	console.log("trying to create user");
-
-	User.create(req.body).then(function(user){
-    if(!user) res.send(res, "not saved");
-    else res.json(user);
-  });
+	res.send("create");
+	// User.create(req.body).then(function(user){
+  //   if(!user) res.send(res, "not saved");
+  //   else res.json(user);
+  // });
 
 }
 
