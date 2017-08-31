@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { FavoritesComponent } from './favorites/favorites.component';
 import { ImageComponent } from './image/image.component';
 import { LandingComponent } from './landing/landing.component';
-import { FormsModule } from '@angular/forms';
+
 
 
 const routes: Routes = [
@@ -24,20 +23,11 @@ const routes: Routes = [
 	{
 		path: 'signup',
 		component: SignupComponent
-	},
-	{
-		path: 'favorites',
-		component: FavoritesComponent
 	}
-
 ];
 
 @NgModule({
-	declarations: [
-		LoginComponent,
-		SignupComponent
-	],
-    imports: [ RouterModule.forRoot(routes), FormsModule ],
+    imports: [ RouterModule.forRoot(routes)],
     exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
