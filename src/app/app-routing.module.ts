@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ImageComponent } from './image/image.component';
 import { LandingComponent } from './landing/landing.component';
-
+import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = [
@@ -23,6 +23,10 @@ const routes: Routes = [
 	{
 		path: 'signup',
 		component: SignupComponent
+	},
+	{
+		path: 'about',
+		component: AboutComponent
 	}
 ];
 

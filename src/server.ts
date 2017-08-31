@@ -8,8 +8,8 @@ import * as bodyParser from 'body-parser';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { router as foodrRouter } from './config/routes';
 
+import { router as foodrRouter } from './config/routes';
 const PORT = 3000;
 
 enableProdMode();
