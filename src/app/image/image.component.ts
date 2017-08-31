@@ -96,10 +96,6 @@ export class ImageComponent implements OnInit {
 
     clickYes() {
 		console.log('clicked yes');
-		if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
-            console.log('restaurantArray is not done, increasing imageCounter');
-            this.arrayCounter++;
-        }
 		this.getImage();
   }
 
@@ -109,16 +105,31 @@ export class ImageComponent implements OnInit {
 		this.getImage();
 	}
 
+    notFood() {
+        console.log('clicked not food');
+    }
+
     getImage() {
-		console.log('image counter: ', this.imageCounter);
+		console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
         console.log('array counter: ', this.arrayCounter);
-		if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
-			this.currentImage = this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter];
-		}
+        if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
+            this.arrayCounter++;
+            this.setImage();
+        } else if (this.imageCounter >= this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1) {
+            this.imageCounter++;
+            this.arrayCounter = 0;
+            this.setImage();
+        }
 	}
 
-        getMoPics() {
-            //do something;
+    setImage() {
+        if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
+            console.log('image has data, setting image');
+            this.currentImage = this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter];
+        } else {
+            console.log('image data empty, re-running getImage()');
+            this.getImage();
+        }
     }
 
     ngOnInit() {
