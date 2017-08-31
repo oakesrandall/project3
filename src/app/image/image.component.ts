@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 
 export class ImageComponent implements OnInit {
+
   favorites: Favorite[]; 
   subscription: Subscription;
 
@@ -28,25 +29,34 @@ export class ImageComponent implements OnInit {
   //googlePlacesDetailsAPIurl: any = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey;
   results;
   public headers = new Headers({ 
+
+    currentImage: any = './assets/images/loading_burger.gif';
+    myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
+    imageCounter: number = 0;
+    arrayCounter: number = 0;
+    //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
+    restaurantArray: any = [];
+    restaurantObjectsForPassingArray: any = [];
+    myLat: any = '39.758451';
+    myLng: any = '-105.00762450000002';
+    googlePlacesNearbyAPIurl: any = 'https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
+    //googlePlacesDetailsAPIurl: any = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey;
+    results;
+    public headers = new Headers({ 
   	'Content-Type': 'application/json', 
-   'Access-Control-Allow-Origin' : '*' 
- });
+    'Access-Control-Allow-Origin' : '*' 
+});
 	public options = new RequestOptions({ headers: this.headers });
 
-  getRestaurants() {
-  	console.log('this is the google places api call - nearby');
-  	//console.log(this.googlePlacesNearbyAPIurl);
-  	//console.log(this.options);
+    getRestaurants() {
+  	    console.log('this is the google places api call - nearby');
 		return this.http.get(this.googlePlacesNearbyAPIurl, this.options)
 		.toPromise()
 		.then(response => {
-			//console.log("heeeere");
 			this.results = response.json().results;
 		})
 		.then(response => {
 			this.results.forEach(restaurant => {
-				//console.log(restaurant.place_id);
-				//console.log(this.restaurantArray);
 				this.restaurantArray.push(restaurant.place_id);
 			})
 			console.log(this.restaurantArray);
@@ -54,14 +64,12 @@ export class ImageComponent implements OnInit {
 		})
 	}
 
-   getRestaurantDetails() {
-   	console.log('this is the google places api call - details');
+    getRestaurantDetails() {
+   	    console.log('this is the google places api call - details');
 	 	this.restaurantArray.forEach(restaurant => {
-	 		//console.log(restaurant);
 	 		return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
 	 		.toPromise()
 	 		.then(response => {
-	 			//console.log(response);
 	 			this.results = response.json().result;
 	 			let tempArray = [];
 	 			let restaurantObject = {
@@ -82,51 +90,62 @@ export class ImageComponent implements OnInit {
 	 			this.restaurantObjectsForPassingArray.push(restaurantObject);
 	 		});
 	 	});
-		 console.log(this.restaurantObjectsForPassingArray);
-		 console.log(this.currentImage);
-		 
-			 this.getImage();
-		 
+        console.log(this.restaurantObjectsForPassingArray);
 	}
+
 
   constructor(private http: Http,
   			 private route: ActivatedRoute,
   			 private router: Router,
   			 private favoriteService: FavoritesService
   ) { }
+
   
-  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
-  swipe(action = this.SWIPE_ACTION.RIGHT) {
-    if (action === this.SWIPE_ACTION.LEFT) {
+    SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
+    swipe(action) {
+        if (action === this.SWIPE_ACTION.LEFT) {
 			console.log('swiped left');
-			this.imageCounter ++;
+            this.imageCounter ++;
 			this.getImage();
+            
     } else if (action === this.SWIPE_ACTION.RIGHT) {
 			console.log('swiped right')
-			this.imageCounter ++;
+			if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
+                console.log('restaurantArray is not done, increasing imageCounter');
+                this.arrayCounter++;
+            }
 			this.getImage();
     }
   }
 
-  clickYes() {
+    clickYes() {
 		console.log('clicked yes');
-		this.imageCounter ++;
 		this.getImage();
   }
 
-  clickNo() {
+    clickNo() {
 		console.log('clicked no');
 		this.imageCounter ++;
 		this.getImage();
 	}
-	imageCounter: number = 0;
-	
-	getImage() {
-		console.log('image counter: ', this.imageCounter);
-		if (this.imageCounter < this.restaurantObjectsForPassingArray[1].photos.length -1) {
-			this.currentImage = this.restaurantObjectsForPassingArray[1].photos[this.imageCounter];
-		}
+
+    notFood() {
+        console.log('clicked not food');
+    }
+
+    getImage() {
+		console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
+        console.log('array counter: ', this.arrayCounter);
+        if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
+            this.arrayCounter++;
+            this.setImage();
+        } else if (this.imageCounter >= this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1) {
+            this.imageCounter++;
+            this.arrayCounter = 0;
+            this.setImage();
+        }
 	}
+
 
   ngOnInit() {
   	this.subscription = this.favoriteService.favoritesChanged
@@ -137,8 +156,25 @@ export class ImageComponent implements OnInit {
   		);
   	this.favorites = this.favoriteService.getFavorites();
   	console.log('ngOnInit hit');
+
+    setImage() {
+        if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
+            console.log('image has data, setting image');
+            this.currentImage = this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter];
+        } else {
+            console.log('image data empty, re-running getImage()');
+            this.getImage();
+        }
+    }
+
+    ngOnInit() {
+  	    console.log('ngOnInit hit');
+
 		this.getRestaurants();
 		
   }
-
 }
+
+
+
+
