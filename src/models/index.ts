@@ -1,7 +1,7 @@
 //Connect
 import * as Sequelize from 'sequelize';
 
-var sequelize = new Sequelize('postgres://alexli@localhost:5432/food_tinder');
+var sequelize = new Sequelize('postgres://marshallcreger@localhost:5432/food_tinder');
 
 var User = sequelize.import("./user");
 var Restaurant = sequelize.import("./restaurant");

@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { FavoritesComponent } from './favorites/favorites.component';
 import { ImageComponent } from './image/image.component';
-import { FormsModule } from '@angular/forms';
+import { LandingComponent } from './landing/landing.component';
+import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = [
 	{
 		path: '',
+		component: LandingComponent
+	},
+	{
+		path: 'home',
 		component: ImageComponent
 	},
 	{
@@ -21,18 +25,13 @@ const routes: Routes = [
 		component: SignupComponent
 	},
 	{
-		path: 'favorites',
-		component: FavoritesComponent
+		path: 'about',
+		component: AboutComponent
 	}
-
 ];
 
 @NgModule({
-	declarations: [
-		LoginComponent,
-		SignupComponent
-	],
-    imports: [ RouterModule.forRoot(routes), FormsModule ],
+    imports: [ RouterModule.forRoot(routes)],
     exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

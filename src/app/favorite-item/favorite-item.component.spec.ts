@@ -3,22 +3,22 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http'; //FORGOT
 import { RouterTestingModule } from '@angular/router/testing' //FORGOT
 
-import { FavoritesComponent } from './favorites.component';
+import { FavoriteItemComponent } from './favorite-item.component';
 
-describe('FavoritesComponent', () => {
-  let component: FavoritesComponent;
-  let fixture: ComponentFixture<FavoritesComponent>;
+describe('FavoriteItemComponent', () => {
+  let component: FavoriteItemComponent;
+  let fixture: ComponentFixture<FavoriteItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FavoritesComponent ],
+      declarations: [ FavoriteItemComponent ],
       imports: [HttpModule, RouterTestingModule] // FORGET
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FavoritesComponent);
+    fixture = TestBed.createComponent(FavoriteItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

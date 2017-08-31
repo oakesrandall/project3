@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  photo: string;
+
   constructor(private authService: AuthService,
               private dataService: DataService,
               private router: Router) { }
 
   ngOnInit() {
+    this.photo = "/assets/images/meat-vegetables-gemuesepiess-mushrooms-111131.jpeg";
   	
   }
 

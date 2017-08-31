@@ -4,14 +4,19 @@ import { platformServer, renderModuleFactory } from '@angular/platform-server'
 import { enableProdMode } from '@angular/core'
 import { AppServerModuleNgFactory } from '../dist/ngfactory/src/app/app.server.module.ngfactory'
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-const PORT = 4000;
+
+import { router as foodrRouter } from './config/routes';
+const PORT = 3000;
 
 enableProdMode();
 
 const app = express();
+app.use(bodyParser.json());
+app.use(foodrRouter);
 
 let template = readFileSync(join(__dirname, '..', 'dist', 'index.html')).toString();
 
