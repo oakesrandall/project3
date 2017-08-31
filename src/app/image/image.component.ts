@@ -81,15 +81,10 @@ export class ImageComponent implements OnInit {
     swipe(action) {
         if (action === this.SWIPE_ACTION.LEFT) {
 			console.log('swiped left');
-            this.imageCounter ++;
 			this.getImage();
             
     } else if (action === this.SWIPE_ACTION.RIGHT) {
 			console.log('swiped right')
-			if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
-                console.log('restaurantArray is not done, increasing imageCounter');
-                this.arrayCounter++;
-            }
 			this.getImage();
     }
   }
@@ -101,7 +96,6 @@ export class ImageComponent implements OnInit {
 
     clickNo() {
 		console.log('clicked no');
-		this.imageCounter ++;
 		this.getImage();
 	}
 
