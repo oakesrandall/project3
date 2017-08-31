@@ -6,7 +6,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ImageComponent } from './image/image.component';
 import { LandingComponent } from './landing/landing.component';
 import { FormsModule } from '@angular/forms';
-
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
 	{
@@ -28,6 +28,10 @@ const routes: Routes = [
 	{
 		path: 'favorites',
 		component: FavoritesComponent
+	},
+	{
+		path: 'about',
+		component: AboutComponent
 	}
 
 ];
