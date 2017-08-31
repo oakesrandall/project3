@@ -3,6 +3,14 @@ var User = db.models.User;
 
 
 function index(req, res) {
+	console.log("trying to get all users");
+	User.findAll().then(function(users) {
+		res.json(users);
+	});
+}
+
+function show(req, res) {
+	console.log('getting user');
 	// User.findAll().then(function(users) {
 	// 	res.json(users);
 	// });
