@@ -17,10 +17,6 @@ function show(req, res) {
 	res.send("index");
 }
 
-function show(req, res) {
-	res.send("show");
-}
-
 function create(req, res) {
 	console.log("trying to create user");
 	res.send("create");

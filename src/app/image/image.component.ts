@@ -4,6 +4,8 @@ import 'rxjs/add/operator/toPromise';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { Favorite } from '../favorites.model';
 import { FavoritesService } from '../favorites.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-image',
@@ -12,7 +14,10 @@ import { FavoritesService } from '../favorites.service';
 })
 
 export class ImageComponent implements OnInit {
-	currentImage: any = './assets/images/loading_burger.gif';
+  favorites: Favorite[]; 
+  subscription: Subscription;
+
+  currentImage: any = './assets/images/loading_burger.gif';
   myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
   //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
   restaurantArray: any = [];
@@ -84,7 +89,11 @@ export class ImageComponent implements OnInit {
 		 
 	}
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+  			 private route: ActivatedRoute,
+  			 private router: Router,
+  			 private favoriteService: FavoritesService
+  ) { }
   
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
   swipe(action = this.SWIPE_ACTION.RIGHT) {
@@ -120,6 +129,13 @@ export class ImageComponent implements OnInit {
 	}
 
   ngOnInit() {
+  	this.subscription = this.favoriteService.favoritesChanged
+  		.subscribe(
+  			(favorites: Favorite[]) => {
+  				this.favorites = favorites;
+  			}
+  		);
+  	this.favorites = this.favoriteService.getFavorites();
   	console.log('ngOnInit hit');
 		this.getRestaurants();
 		
