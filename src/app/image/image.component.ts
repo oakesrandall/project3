@@ -15,8 +15,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 export class ImageComponent implements OnInit {
 
-  favorites: Favorite[]; 
-  subscription: Subscription;
+    favorites: Favorite[]; 
+    subscription: Subscription;
 
   currentImage: any = './assets/images/loading_burger.gif';
     
@@ -54,10 +54,10 @@ export class ImageComponent implements OnInit {
     // this is the first api call to collect the placeids of the 20 closest restaurants
     getRestaurants() {
         console.log('this is the google places api call - nearby');
-    return this.http.get(this.googlePlacesNearbyAPIurl, this.options)
+        return this.http.get(this.googlePlacesNearbyAPIurl, this.options)
     .toPromise()
     .then(response => {
-      this.results = response.json().results;
+        this.results = response.json().results;
     })
     .then(response => {
       this.results.forEach(restaurant => {
@@ -75,19 +75,19 @@ getRestaurantDetails() {
          console.log('this is the google places api call - details');
      // this will have to happen for each place id
      this.restaurantArray.forEach(restaurant => {
-       return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
-       .toPromise()
-       .then(response => {
+         return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?placeid=' + restaurant + '&key=' + this.myKey, this.options) 
+         .toPromise()
+         .then(response => {
          this.results = response.json().result;
          let tempArray = [];
          // build the objects that will eventually be passed for use rendering images and saving businesses to the database
          let restaurantObject = {
-           name: this.results.name,
-           address: this.results.formatted_address,
-           lat: this.results.geometry.location.lat,
-           lng: this.results.geometry.location.lng,
-           websiteURL: this.results.website,
-           photos: [],
+             name: this.results.name,
+             address: this.results.formatted_address,
+             lat: this.results.geometry.location.lat,
+             lng: this.results.geometry.location.lng,
+             websiteURL: this.results.website,
+             photos: [],
          };
          for (let i in this.results.photos) {
            // this works whether there is 1, 10, or no photos
@@ -99,10 +99,10 @@ getRestaurantDetails() {
          //console.log(restaurantObject.photos);
          // this is the array of restaurants with all the details and photos
          this.restaurantObjectsForPassingArray.push(restaurantObject);
-       });
+         });
      });
-        console.log(this.restaurantObjectsForPassingArray);
-  }
+     console.log(this.restaurantObjectsForPassingArray);
+}
 
   constructor(private http: Http,
   			 private route: ActivatedRoute,
@@ -110,33 +110,35 @@ getRestaurantDetails() {
   			 private favoriteService: FavoritesService
   ) { }
 
-  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
-    swipe(action) {
-        if (action === this.SWIPE_ACTION.LEFT) {
-			console.log('swiped left');
-			this.getImage();
+    SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
+        swipe(action) {
+            if (action === this.SWIPE_ACTION.LEFT) {
+			    console.log('swiped left');
+			    this.getImage();
             
-    } else if (action === this.SWIPE_ACTION.RIGHT) {
-			console.log('swiped right')
-			this.getImage();
-    }
-  }
+            } else if (action === this.SWIPE_ACTION.RIGHT) {
+			    console.log('swiped right')
+			    this.getImage();
+            }
+        }
 
 
     clickYes() {
-    console.log('clicked yes');
-    this.getImage();
-  }
+        console.log('clicked yes');
+        this.getImage();
+    }
 
     clickNo() {
 		console.log('clicked no');
 		this.getImage();
 	}
-  notFood() {
+
+    notFood() {
         console.log('clicked not food');
     }
-  getImage() {
-    console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
+  
+    getImage() {
+        console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
         console.log('array counter: ', this.arrayCounter);
         if (this.imageCounter < this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1 && this.arrayCounter < this.restaurantObjectsForPassingArray.length -1) {
             this.arrayCounter++;
@@ -146,7 +148,7 @@ getRestaurantDetails() {
             this.arrayCounter = 0;
             this.setImage();
         }
-  }
+    }
 
   setImage() {
         if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
@@ -159,13 +161,12 @@ getRestaurantDetails() {
     }
 
 
-  ngOnInit() {
-  	this.subscription = this.favoriteService.favoritesChanged
+    ngOnInit() {
+  	    this.subscription = this.favoriteService.favoritesChanged
   		.subscribe(
-  			(favorites: Favorite[]) => {
-  				this.favorites = favorites;
-  			}
-  		);
+  			(favorites: Favorite[]) => 
+              { this.favorites = favorites; }
+  		    );
     	this.favorites = this.favoriteService.getFavorites();
     	console.log('ngOnInit hit');
       // on init, getRestaurants is triggered, setting the whole thing in motion
