@@ -1,4 +1,4 @@
-#Alex TO Test
+
 # Welcome
 
 # Elevator Pitch
@@ -50,6 +50,7 @@ Our users find new places to eat through friends or family. Still a fun app idea
 
 ### Link to Project 3
 <p> Our link hosted on Heroku [link](/)</p>
+https://foodr-app.herokuapp.com/
 
 ### Technologies
 Angular,
