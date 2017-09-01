@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { DataService } from '../data-storage.service';
+import * as firebase from 'firebase';
+import { ApiKeyService } from '../apikey.service';
+import { FirebaseService } from '../firebase.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-signup',
@@ -10,17 +14,25 @@ import { DataService } from '../data-storage.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  
+  subscription: Subscription;
   newUser = <any>{};
   photo: string;
+  message: any;
 
   constructor(
+      private firebaseService: FirebaseService,
       private authService: AuthService,
-      private dataService: DataService
-   ) { }
+      private dataService: DataService,
+      private apiKeyService: ApiKeyService
+   ) {
+      this.subscription = this.firebaseService.startFirebase().subscribe(
+         message => {
+           this.message = message;
+     });
+   }
 
   ngOnInit() {
-    this.photo = "/assets/images/pexels-photo-66639.jpeg";
+    this.photo = "/assets/images/food-man-person-eating.jpg";
   }
 
   onSignup(newUser) {
@@ -30,7 +42,7 @@ export class SignupComponent implements OnInit {
   	const password = newUser.password;
     console.log(email);
     console.log(password);
-    //this.authService.signupUser(email, password);
+    this.authService.signupUser(email, password);
     console.log(newUser);
     this.dataService.storeUser(newUser);
   }

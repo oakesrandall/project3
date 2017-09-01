@@ -18,11 +18,10 @@ export class AuthService {
 	signupUser(email: string, password: string) {
 		firebase.auth().createUserWithEmailAndPassword(email, password)
 			.then(response => {
-				console.log(response.uid);
-				this.uid = response.uid;
-				console.log(this.uid);
+				console.log(response);
+
 				//this.newUser = response.email;
-				this.dataService.storeUser(this.uid);
+				//this.dataService.storeUser(this.uid);
 				this.router.navigate(['/home']);
 				firebase.auth().currentUser.getToken()
 					.then(
@@ -64,8 +63,8 @@ export class AuthService {
 				(token: string) => this.token = token
 			);
 			// need to call data service to get user info
-
-			
+			console.log("calling get token");
+			this.router.navigate(['/home']);
 			return this.token;
 	}
 
