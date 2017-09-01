@@ -10,11 +10,11 @@ function index(req, res) {
 }
 
 function show(req, res) {
-	console.log('getting user');
+	res.send('show route');
 	// User.findAll().then(function(users) {
 	// 	res.json(users);
 	// });
-	res.send("index");
+	//res.send("index");
 }
 
 function create(req, res) {
