@@ -1,4 +1,4 @@
-#Alex TO Test
+
 # Welcome
 
 # Elevator Pitch
@@ -9,9 +9,9 @@ This is the readme for our project 3 app Foodr-app.  This app will show users ra
 ### Wireframes
 ![Wireframes](/wireframe/Desktop_View.png "Desktop_View")
 ![Wireframes](/wireframe/Mobile_View.png "Mobile_View")
-![Wireframes](/wireframe/erdplus-diagram.png "ERD")
 
 ### ERD
+![Wireframes](/wireframe/erdplus-diagram.png "ERD")
 
 ### Trello
 <p> Our trello board [Trello](https://trello.com/b/3D15p0fo/project-3)</p>
@@ -27,7 +27,7 @@ User1:
 6- How do you go about search for a restaurants or go out to eat? Word of mouth from friends or family or search online
 7- What are the factors that go into picking a restaurants? Good reviews. Ambiance. Location. Delicious food reasonably priced
 8- How important are the pictures of the food? Very
-9- How accurate are pictures onthe said services? I don't know.
+9- How accurate are pictures on the said services? I don't know.
 10- How important is location/ proximity to finding a new restaurants? Very
 11- What do you wish you could do? Eat my way through Europe with my Eli and my Marshall.
 
@@ -50,6 +50,7 @@ Our users find new places to eat through friends or family. Still a fun app idea
 
 ### Link to Project 3
 <p> Our link hosted on Heroku [link](/)</p>
+https://foodr-app.herokuapp.com/
 
 ### Technologies
 Angular,

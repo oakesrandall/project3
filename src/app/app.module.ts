@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FavoritesRoutingModule } from './favorites/favorites-routing.module';
@@ -12,6 +13,7 @@ import { AuthService } from './auth.service';
 import { DataService } from './data-storage.service';
 import { ApiKeyService } from './apikey.service';
 import { FavoritesService } from './favorites.service';
+import { FirebaseService } from './firebase.service';
 
 import { AppComponent } from './app.component';
 import { ImageComponent } from './image/image.component';
@@ -58,6 +60,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AuthService,
     ApiKeyService,
     DataService,
+    FirebaseService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
 
   ],
