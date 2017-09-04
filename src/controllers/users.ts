@@ -10,7 +10,7 @@ function index(req, res) {
 }
 
 function show(req, res) {
-	res.send('show route');
+	res.json('*******show route');
 	// User.findAll().then(function(users) {
 	// 	res.json(users);
 	// });
@@ -24,6 +24,10 @@ function create(req, res) {
   //   if(!user) res.send(res, "not saved");
   //   else res.json(user);
   // });
+
+}
+
+function addFavorites(req, res) {
 
 }
 
@@ -41,5 +45,6 @@ usersController.show = show;
 usersController.create = create;
 usersController.update = update;
 usersController.destroy = destroy;
+usersController.addFavorites = addFavorites;
 
 export {usersController};
