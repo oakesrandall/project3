@@ -43,8 +43,6 @@ export class AuthService {
 				// Then route to home page
 
 				this.router.navigate(['/home']);
-				
-				
 			})
 			.catch(function(error) {
 				return error;
@@ -78,7 +76,7 @@ export class AuthService {
 				return error;
 			}
 		);
-		
+
 	};
 
 	getToken() {
@@ -87,6 +85,7 @@ export class AuthService {
 				(token: string) => this.token = token
 			);
 			// need to call data service to get user info
+
 			console.log("calling get token");
 			
 			return this.token;
@@ -96,7 +95,7 @@ export class AuthService {
 		return this.token != null;
 	}
 
-	// logout 
+	// logout
 	logout() {
 		firebase.auth().signOut();
 		this.router.navigate(['']);

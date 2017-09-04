@@ -20,10 +20,13 @@ export class ImageComponent implements OnInit {
     subscription: Subscription;
     newFavorite = <any>{};
 
-  currentImage: any = './assets/images/loading_burger.gif';
+    //sets the default image to the loading burger gif
+    currentImage: any = './assets/images/loading_burger.gif';
     
     // google api key
     myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
+    
+    //sets counters for iterating through restaurant arrays and photo arrays
     imageCounter: number = 0;
     arrayCounter: number = 0;
     currentRestaurantName;
@@ -115,7 +118,7 @@ getRestaurantDetails() {
   			 private favoriteService: FavoritesService,
          private dataService: DataService
   ) { }
-
+    //creates swipe events using Hammer.JS
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
         swipe(action) {
             if (action === this.SWIPE_ACTION.LEFT) {
@@ -128,13 +131,14 @@ getRestaurantDetails() {
             }
         }
 
-
+    //listens for click "yes"
     clickYes() {
         console.log('clicked yes');
         this.getImage();
         this.saveRestaurantDetailsToFavorites();
     }
 
+    //listens for click "no"
     clickNo() {
 		console.log('clicked no');
 
@@ -142,10 +146,16 @@ getRestaurantDetails() {
 		this.getImage();
 	}
 
+    //listens for click on "not food button"
     notFood() {
         console.log('clicked not food');
+        this.getImage();
     }
   
+    //shows images using two counters, one for the array of restaurant objects, and one for the array of images inside each
+    //restaurant object
+    //iterates through the array of restaurants at the same photo index, once it hits the end of the restaurant array,
+    //it resets the restaurant index and increments the photo index and does it again
     getImage() {
         console.log('image counter: ', this.imageCounter, ' photo array length ', this.restaurantObjectsForPassingArray[this.arrayCounter].photos.length -1);
         console.log('array counter: ', this.arrayCounter);
@@ -159,7 +169,8 @@ getRestaurantDetails() {
         }
     }
 
-  setImage() {
+    //sets the image to the currentImage
+    setImage() {
         if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
             console.log('image has data, setting image');
             console.log(this.restaurantObjectsForPassingArray);
