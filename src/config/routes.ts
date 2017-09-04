@@ -9,8 +9,11 @@ import { restaurantsController } from '../controllers/restaurants';
 
 router.get('/api/users', usersController.index);
 
-// create
+// create new user
 router.post('/api/users', usersController.create);
+
+// Add favorites to user
+router.post('/api/favorites', usersController.addFavorites);
 
 // show
 router.get('/api/users/:id', usersController.show);

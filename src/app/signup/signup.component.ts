@@ -18,7 +18,8 @@ export class SignupComponent implements OnInit {
   newUser = <any>{};
   photo: string;
   message: any;
-
+  firebaseError;
+  
   constructor(
       private firebaseService: FirebaseService,
       private authService: AuthService,
@@ -37,14 +38,17 @@ export class SignupComponent implements OnInit {
 
   onSignup(newUser) {
     
-    console.log(newUser);
+    console.log("the new user is " + newUser);
   	const email = newUser.email;
   	const password = newUser.password;
     console.log(email);
     console.log(password);
     this.authService.signupUser(email, password);
-    console.log(newUser);
-    this.dataService.storeUser(newUser);
+    this.dataService.storeUser(email)
+            .subscribe(response => {
+              
+              console.log("The json response is " + response.json());
+          })
   }
 
 

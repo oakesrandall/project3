@@ -7,22 +7,31 @@ import { Http } from '@angular/http';
 @Injectable()
 export class DataService {
 
+	constructor(private http: Http) { }
+
+	user;
+
 	baseUrl = 'http://localhost:3000';
-	url: string;
 
 	storeUser(email) {
 		console.log("sending user data to backend");
 		
-		this.http.post(`${this.baseUrl}/users/`, email);
+		return this.http.post(`${this.baseUrl}/api/users/`, email);
 
 	}
 	//${uid}
-	getUser(uid) {
-		console.log("the user id is" + uid);
+	getUser(email) {
+		console.log("the user id is" + email);
 		console.log("sending user data to backend");
 
-		this.http.get(`${this.baseUrl}/api/users/${uid}`);
+		return this.http.get(`${this.baseUrl}/api/users/${email}`);
 	}
 
-	constructor(private http: Http) { }
+	storeFavorites(newFavorite) {
+		console.log("******new favorite added");
+		console.log(newFavorite);
+	}
+
+
+
 }

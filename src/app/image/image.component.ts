@@ -6,6 +6,7 @@ import { Favorite } from '../favorites.model';
 import { FavoritesService } from '../favorites.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import  { DataService } from '../data-storage.service';
 
 @Component({
   selector: 'app-image',
@@ -17,6 +18,7 @@ export class ImageComponent implements OnInit {
 
     favorites: Favorite[]; 
     subscription: Subscription;
+    newFavorite = <any>{};
 
   currentImage: any = './assets/images/loading_burger.gif';
     
@@ -24,6 +26,9 @@ export class ImageComponent implements OnInit {
     myKey: any = 'AIzaSyD3essuc-XcBtyX5W4TroWXQLWOug2xb5o';
     imageCounter: number = 0;
     arrayCounter: number = 0;
+    currentRestaurantName;
+    currentRestaurantAddress;
+    currentRestaurantWebsite;
     
     // extra google api keys for heavy testing
     //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
@@ -107,7 +112,8 @@ getRestaurantDetails() {
   constructor(private http: Http,
   			 private route: ActivatedRoute,
   			 private router: Router,
-  			 private favoriteService: FavoritesService
+  			 private favoriteService: FavoritesService,
+         private dataService: DataService
   ) { }
 
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
@@ -126,10 +132,13 @@ getRestaurantDetails() {
     clickYes() {
         console.log('clicked yes');
         this.getImage();
+        this.saveRestaurantDetailsToFavorites();
     }
 
     clickNo() {
 		console.log('clicked no');
+
+    
 		this.getImage();
 	}
 
@@ -153,20 +162,41 @@ getRestaurantDetails() {
   setImage() {
         if (this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter]) {
             console.log('image has data, setting image');
+            console.log(this.restaurantObjectsForPassingArray);
             this.currentImage = this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter];
+            this.currentRestaurantName = this.restaurantObjectsForPassingArray[this.arrayCounter].name;
+            this.currentRestaurantAddress = this.restaurantObjectsForPassingArray[this.arrayCounter].address;
+            this.currentRestaurantWebsite = this.restaurantObjectsForPassingArray[this.arrayCounter].websiteURL;
+            console.log(this.currentRestaurantName);
+            console.log(this.currentRestaurantAddress);
+            console.log(this.currentRestaurantWebsite);
         } else {
             console.log('image data empty, re-running getImage()');
             this.getImage();
         }
     }
 
+    // Save a restaurant when a user swipes that they like it
+    saveRestaurantDetailsToFavorites() {
+        //create a favorite object 
+        this.newFavorite = {
+            restaurantName: this.currentRestaurantName,
+            restaurantAddress: this.currentRestaurantAddress,
+            restaurantWebsite: this.currentRestaurantWebsite
+        }
+        this.dataService.storeFavorites(this.newFavorite);
+    }
+
+    saveToFavorites() {
+
+    }
 
     ngOnInit() {
   	    this.subscription = this.favoriteService.favoritesChanged
-  		.subscribe(
-  			(favorites: Favorite[]) => 
-              { this.favorites = favorites; }
-  		    );
+  		    .subscribe(
+      			(favorites: Favorite[]) => 
+                  { this.favorites = favorites; }
+      		   );
     	this.favorites = this.favoriteService.getFavorites();
     	console.log('ngOnInit hit');
       // on init, getRestaurants is triggered, setting the whole thing in motion
