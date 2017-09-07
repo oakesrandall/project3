@@ -11,8 +11,8 @@ export class FavoritesService {
 	favoritesChanged = new Subject<Favorite[]>();
 
 	private favorites: Favorite[] = [
-		new Favorite('Linger', '(303) 993-3120', '2030 W 30th Ave, Denver, CO 80211', 'https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17881514_123624571517356_9002373674300342272_n.jpg', 'places.singleplatform.com', 4.4),
-		new Favorite('Linger', '(303) 993-3120', '2030 W 30th Ave, Denver, CO 80211', 'https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/17881514_123624571517356_9002373674300342272_n.jpg', 'places.singleplatform.com', 4.4)
+		new Favorite('Linger', '2030 W 30th Ave, Denver, CO 80211', 'places.singleplatform.com'),
+		new Favorite('Linger', '2030 W 30th Ave, Denver, CO 80211', 'places.singleplatform.com')
 	]
 
 	constructor() { }
