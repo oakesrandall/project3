@@ -1,3 +1,13 @@
+button {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#valueProp {
+	padding-left: 10%;
+	padding-right:10%;
+}
+
 .landingPage {
     
     height: 750px;
