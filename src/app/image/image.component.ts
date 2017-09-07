@@ -44,11 +44,13 @@ export class ImageComponent implements OnInit {
     restaurantObjectsForPassingArray: any = [];
     
     // defining lat and long as variables so that hopefully they can updated on the fly with geolocation
-    myLat: any = '39.758451';
-    myLng: any = '-105.00762450000002';
+    //myLat: any = '39.758451';
+    //myLng: any = '-105.00762450000002';
+    myLat;
+    myLng;
     
     // defining api request url as variable to drop in later
-    googlePlacesNearbyAPIurl: any = 'https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
+    //googlePlacesNearbyAPIurl: any = 'https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey;
     //googlePlacesDetailsAPIurl: any = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + this.restaurant + '&key=' + this.myKey;
     
     // declaring results
@@ -59,10 +61,23 @@ export class ImageComponent implements OnInit {
 });
 	public options = new RequestOptions({ headers: this.headers });
 
+    getLocation() {
+      navigator.geolocation.getCurrentPosition(res => {
+        //console.log(res);
+        //console.log(res.coords.latitude + ' ' + res.coords.longitude)
+        this.myLat = res.coords.latitude;
+        this.myLng = res.coords.longitude;
+        //console.log(this.myLat + ' ' + this.myLng);
+        this.getRestaurants();
+      })
+    }
+
+
     // this is the first api call to collect the placeids of the 20 closest restaurants
     getRestaurants() {
         console.log('this is the google places api call - nearby');
-        return this.http.get(this.googlePlacesNearbyAPIurl, this.options)
+        console.log(this.myLat + ' ' + this.myLng);
+        return this.http.get('https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + this.myLat + ',' + this.myLng + '&rankby=distance&type=restaurant&key=' + this.myKey, this.options)
     .toPromise()
     .then(response => {
         this.results = response.json().results;
@@ -211,7 +226,8 @@ getRestaurantDetails() {
     	this.favorites = this.favoriteService.getFavorites();
     	console.log('ngOnInit hit');
       // on init, getRestaurants is triggered, setting the whole thing in motion
-      this.getRestaurants();
+      //this.getRestaurants();
+      this.getLocation();
   }
 }
 
