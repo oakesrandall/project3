@@ -6,7 +6,9 @@ import { Favorite } from './favorites.model';
 @Injectable() 
 export class FavoritesService {
 
-	baseUrl = 'http://localhost:3000';
+	//baseUrl = 'http://localhost:3000';
+	baseUrl = 'https://protected-basin-12594.herokuapp.com';
+	
 	
 	favoritesChanged = new Subject<Favorite[]>();
 

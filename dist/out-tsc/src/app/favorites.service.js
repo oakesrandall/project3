@@ -5,7 +5,8 @@ var Subject_1 = require("rxjs/Subject");
 var favorites_model_1 = require("./favorites.model");
 var FavoritesService = (function () {
     function FavoritesService() {
-        this.baseUrl = 'http://localhost:3000';
+        //baseUrl = 'http://localhost:3000';
+        this.baseUrl = 'https://protected-basin-12594.herokuapp.com';
         this.favoritesChanged = new Subject_1.Subject();
         this.favorites = [
             new favorites_model_1.Favorite('Linger', '2030 W 30th Ave, Denver, CO 80211', 'places.singleplatform.com'),
