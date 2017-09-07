@@ -11,9 +11,8 @@ export class FavoritesService {
 	favoritesChanged = new Subject<Favorite[]>();
 
 	private favorites: Favorite[] = [
-		new Favorite('Linger', '2030 W 30th Ave, Denver, CO 80211', 'places.singleplatform.com'),
-		new Favorite('Linger', '2030 W 30th Ave, Denver, CO 80211', 'places.singleplatform.com')
-	]
+		new Favorite('Linger', '2030 W 30th Ave, Denver, CO 80211',  'places.singleplatform.com')
+	] 
 
 	constructor() { }
 
@@ -24,6 +23,7 @@ export class FavoritesService {
 
 	addFavorites(favorite: Favorite) {
 		this.favorites.push(favorite);
+		console.log(this.favorites)
 		this.favoritesChanged.next(this.favorites.slice());
 	}
 

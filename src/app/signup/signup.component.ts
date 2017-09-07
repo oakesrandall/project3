@@ -19,17 +19,32 @@ export class SignupComponent implements OnInit {
   photo: string;
   message: any;
   firebaseError;
+  firebaseErrorMessage: string;
+  // Token return by firebase
+  token: string;
+
+  // User id returned by firebase
+  uid: string;
+
+  // email returned by firebase
+  email: string;
   
   constructor(
       private firebaseService: FirebaseService,
       private authService: AuthService,
       private dataService: DataService,
+      private router: Router,
       private apiKeyService: ApiKeyService
    ) {
       this.subscription = this.firebaseService.startFirebase().subscribe(
          message => {
            this.message = message;
-     });
+       });
+      authService.firebaseAnnounced$.subscribe(
+         error => {
+           this.firebaseErrorMessage = error
+         }
+      )
    }
 
   ngOnInit() {
@@ -43,7 +58,7 @@ export class SignupComponent implements OnInit {
   	const password = newUser.password;
     console.log(email);
     console.log(password);
-    this.authService.signupUser(email, password);
+    this.authService.signupUser(email, password)
     this.dataService.storeUser(email)
             .subscribe(response => {
               
@@ -51,5 +66,5 @@ export class SignupComponent implements OnInit {
           })
   }
 
-
+ 
 }

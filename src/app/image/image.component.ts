@@ -192,15 +192,14 @@ getRestaurantDetails() {
         //create a favorite object 
         this.newFavorite = {
             restaurantName: this.currentRestaurantName,
-            restaurantAddress: this.currentRestaurantAddress,
-            restaurantWebsite: this.currentRestaurantWebsite
+            address: this.currentRestaurantAddress,
+            website: this.currentRestaurantWebsite
         }
-        this.dataService.storeFavorites(this.newFavorite);
+        console.log(this.newFavorite);
+        this.favoriteService.addFavorites(this.newFavorite);
+        //this.dataService.storeFavorites(this.newFavorite);
     }
 
-    saveToFavorites() {
-
-    }
 
     ngOnInit() {
   	    this.subscription = this.favoriteService.favoritesChanged

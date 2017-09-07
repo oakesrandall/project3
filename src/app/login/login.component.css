@@ -4,3 +4,9 @@
 	width: 100%;
 	color: white;
 }
+
+.firebaseError {
+	font-size: 24px;
+	height: 75px;
+	margin-top: 15px;
+}

@@ -7,6 +7,8 @@ import * as firebase from 'firebase';
 import { ApiKeyService } from '../apikey.service';
 import { FirebaseService } from '../firebase.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,14 @@ export class LoginComponent implements OnInit {
   photo: string;
   newUser = <any>{}
   loggedInUser = <any>{}
-  firebaseError;
+  firebaseErrorMessage: string;
+  //authToken = new Subject<string>();
+  token: string;
+  // User id returned by firebase
+  uid: string;
+
+  // email returned by firebase
+  email: string;
 
   constructor(
               private firebaseService: FirebaseService,
@@ -31,6 +40,12 @@ export class LoginComponent implements OnInit {
          message => {
            this.message = message;
      });
+     authService.firebaseAnnounced$.subscribe(
+         error => {
+           this.firebaseErrorMessage = error
+         }
+      )
+
   }
 
   ngOnInit() {
@@ -47,6 +62,7 @@ export class LoginComponent implements OnInit {
     console.log(password);
     this.newUser = { email, password};
     this.authService.loginUser(email, password);
+
     this.dataService.getUser(email)
       .subscribe(
           (response => {
@@ -56,5 +72,6 @@ export class LoginComponent implements OnInit {
   
       
   }
+
 
 }

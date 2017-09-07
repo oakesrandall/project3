@@ -17,26 +17,23 @@ export class AppComponent {
     private dataService: DataService
    ) { }
 
-
-  getLocation() {
-    if (navigator.geolocation){
-      console.log("geolocation services available");
-      navigator.geolocation.getCurrentPosition(this.showPosition)
-    } else {
-      console.log("no geolocation services");
-    }
-    
-  }
 	ngOnInit() {
-    
-		
-    //this.getLocation()
-
+		this.getLocation()
 	}
 
-  showPosition(position) {
-    console.log(position);
-    //var lat = position.coords.latitude;
-  }
-  
+	getLocation() {
+	    if (navigator.geolocation){
+	      console.log("geolocation services available");
+	      navigator.geolocation.getCurrentPosition(this.showPosition)
+	    } else {
+	      console.log("no geolocation services");
+	    }
+    
+  	}
+
+  	showPosition(position) {
+	    console.log(position);
+	    //var lat = position.coords.latitude;
+  	}
+ 
 }
