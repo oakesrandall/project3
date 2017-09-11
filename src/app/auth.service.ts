@@ -3,10 +3,19 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from './data-storage.service';
 import { Http } from '@angular/http';
-//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
+import { Error } from './error.model';
+
 @Injectable()
 export class AuthService {
-	//user: Observable<firebase.User>;
+	// that = this;
+	firebaseError = new Subject<string>();
+	firebaseAnnounced$ = this.firebaseError.asObservable();
+	loggedInUser = new Subject();
+	firebaseLoginError = 'Invalid email or password';
+	firebaseSignupError = 'Invalid email or password. Password must be at least 6 digits in length';
+	
 	baseUrl = 'http://localhost:3000';
 	// Token return by firebase
 	token: string;
@@ -41,12 +50,14 @@ export class AuthService {
 					.then(
 						(token: string) => this.token = token)
 				// Then route to home page
-
+				
 				this.router.navigate(['/home']);
 			})
-			.catch(function(error) {
-				return error;
-			})
+			.catch(error =>
+				//this.error = error;
+				this.returnFirebaseError(this.firebaseSignupError)
+			);
+		
 
 	}
 
@@ -67,15 +78,19 @@ export class AuthService {
 					firebase.auth().currentUser.getToken()
 						.then(
 							(token: string) => this.token = token)
-					//route user to homepage
-					this.router.navigate(['/home']);
 					
+					//route user to homepage
+					return this.router.navigate(['/home']);
+					// return this.email;
 					
 			})
-			.catch(function(error){
-				return error;
-			}
+			.catch(error => 
+				//this.error = error;
+				//console.log(error);
+				this.returnFirebaseError(this.firebaseLoginError)
+
 		);
+
 
 	};
 
@@ -91,6 +106,11 @@ export class AuthService {
 			return this.token;
 	}
 
+	returnFirebaseError(error: string) {
+		console.log("Firebase error");
+		this.firebaseError.next(error);
+	}
+
 	isAuthenticated() {
 		return this.token != null;
 	}
@@ -101,4 +121,23 @@ export class AuthService {
 		this.router.navigate(['']);
 		this.token = null;
 	}
+
+
+	// Get user from database
+	getUser(email) {
+		console.log("the user id is" + email);
+		console.log("sending user data to backend");
+
+		return this.http.get(`${this.baseUrl}/api/users/${email}`);
+	}
+
+	// Store user in database
+	storeUser(email) {
+		console.log("sending user data to backend");
+		
+		return this.http.post(`${this.baseUrl}/api/users/`, email);
+
+	}
+
+	
 }

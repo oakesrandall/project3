@@ -27,6 +27,14 @@ export class DataService {
 		return this.http.get(`${this.baseUrl}/api/users/${email}`);
 	}
 
+	deleteFavorite() {
+		return this.http.delete(`${this.baseUrl}/api/favorites/`)
+	}
+
+	showFavorite() {
+		
+	}
+
 	storeFavorites(newFavorite) {
 		console.log("******new favorite added");
 		console.log(newFavorite);

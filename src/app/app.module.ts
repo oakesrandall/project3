@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FavoritesRoutingModule } from './favorites/favorites-routing.module';
 
 import { AuthService } from './auth.service';
-import { DataService } from './data-storage.service';
+
 import { ApiKeyService } from './apikey.service';
 import { FavoritesService } from './favorites.service';
 import { FirebaseService } from './firebase.service';
@@ -25,8 +25,8 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { DataService } from './data-storage.service';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MyHammerConfig extends HammerGestureConfig  {
   overrides = <any>{
@@ -45,6 +45,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     HeaderComponent,
     LandingComponent,
     FavoriteItemComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'cli-universal-demo'}),
@@ -54,13 +56,12 @@ export class MyHammerConfig extends HammerGestureConfig  {
     RouterModule,
     FavoritesRoutingModule,
     ReactiveFormsModule
-    // BrowserAnimationsModule
   ],
   providers: [
     FavoritesService,
+    DataService,
     AuthService,
     ApiKeyService,
-    DataService,
     FirebaseService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
 
