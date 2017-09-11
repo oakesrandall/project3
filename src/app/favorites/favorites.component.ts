@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -12,9 +12,10 @@ import { FavoritesService } from '../favorites.service';
   styleUrls: ['./favorites.component.css']
 })
 
-export class FavoritesComponent implements OnInit, OnDestroy {
+export class FavoritesComponent implements OnInit {
   favorites: Favorite[];
   subscription: Subscription;
+  favoritesMessage: string = "You currently have no favorites";
 
   constructor(
   		private favoriteService: FavoritesService,
@@ -25,17 +26,19 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+
   	this.subscription = this.favoriteService.favoritesChanged
-  		.subscribe(
-  			(favorites: Favorite[]) => {
-  				this.favorites = favorites;
-  			}
-  		);
-  	this.favorites = this.favoriteService.getFavorites();
+      .subscribe(
+        (favorites: Favorite[]) => {
+          this.favorites = favorites;
+        }
+      );
+    this.favorites = this.favoriteService.getFavorites();
+    console.log(this.favorites);
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 
 }

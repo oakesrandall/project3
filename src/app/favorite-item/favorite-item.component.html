@@ -1,24 +1,21 @@
-<a
-	  style="cursor: pointer;"
-	  [routerLink]="[index]"
-	  routerLinkActive="active"
+
+<a   
 	  class="list-group-item clearfix">
 	  <div class="pull-left">
 	    <h4 class="list-group-item-heading">{{ favorite.restaurantName }}</h4>
-	    <!--
-	    <p class="list-group-item-text">{{favorite.restaurantPhone }}</p>
-	    -->
 	    <p class="list-group-item-text">{{ favorite.address  }}</p>
 	    <p class="list-group-item-text">{{ favorite.website }}</p>
-	    <button type="button" class="btn btn-danger">Delete</button>
+	    <button class="delete"
+      	(click)="deleteFavorite(favorite); $event.stopPropagation()">Delete</button>
 	  </div>
-	  <!--
+	  
 	  <span class="pull-right">
 	        <img
-	          [src]="favorite.imagePath"
+	          [src]="favorite.image"
 	          alt="{{ favorite.restaurantName }}"
 	          class="img-responsive"
 	          style="max-height: 50px;">
 	  </span>
-	  -->
+	 
 </a>
+

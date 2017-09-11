@@ -18,22 +18,22 @@ export class AppComponent {
    ) { }
 
 	ngOnInit() {
-		this.getLocation()
+		//this.getLocation()
 	}
 
-	getLocation() {
-	    if (navigator.geolocation){
-	      console.log("geolocation services available");
-	      navigator.geolocation.getCurrentPosition(this.showPosition)
-	    } else {
-	      console.log("no geolocation services");
-	    }
+	// getLocation() {
+	//     if (navigator.geolocation){
+	//       console.log("geolocation services available");
+	//       navigator.geolocation.getCurrentPosition(this.showPosition)
+	//     } else {
+	//       console.log("no geolocation services");
+	//     }
     
-  	}
+ //  	}
 
-  	showPosition(position) {
-	    console.log(position);
-	    //var lat = position.coords.latitude;
-  	}
+  	// showPosition(position) {
+	  //   console.log(position);
+	  //   //var lat = position.coords.latitude;
+  	// }
  
 }

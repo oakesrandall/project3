@@ -28,7 +28,7 @@ export class DataService {
 	}
 
 	deleteFavorite() {
-
+		return this.http.delete(`${this.baseUrl}/api/favorites/`)
 	}
 
 	showFavorite() {

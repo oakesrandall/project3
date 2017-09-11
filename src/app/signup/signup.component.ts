@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { DataService } from '../data-storage.service';
+
 import * as firebase from 'firebase';
 import { ApiKeyService } from '../apikey.service';
 import { FirebaseService } from '../firebase.service';
@@ -32,7 +32,6 @@ export class SignupComponent implements OnInit {
   constructor(
       private firebaseService: FirebaseService,
       private authService: AuthService,
-      private dataService: DataService,
       private router: Router,
       private apiKeyService: ApiKeyService
    ) {
@@ -59,7 +58,7 @@ export class SignupComponent implements OnInit {
     console.log(email);
     console.log(password);
     this.authService.signupUser(email, password)
-    this.dataService.storeUser(email)
+    this.authService.storeUser(email)
             .subscribe(response => {
               
               console.log("The json response is " + response.json());

@@ -6,7 +6,7 @@ import { Favorite } from '../favorites.model';
 import { FavoritesService } from '../favorites.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import  { DataService } from '../data-storage.service';
+
 
 @Component({
   selector: 'app-image',
@@ -32,6 +32,7 @@ export class ImageComponent implements OnInit {
     currentRestaurantName;
     currentRestaurantAddress;
     currentRestaurantWebsite;
+    currentRestaurantImage;
     
     // extra google api keys for heavy testing
     //'AIzaSyDAe01cMlK4IWJMX4_KoTn9gSEKnfydK0M'
@@ -115,8 +116,7 @@ getRestaurantDetails() {
   constructor(private http: Http,
   			 private route: ActivatedRoute,
   			 private router: Router,
-  			 private favoriteService: FavoritesService,
-         private dataService: DataService
+  			 private favoriteService: FavoritesService
   ) { }
     //creates swipe events using Hammer.JS
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
@@ -178,6 +178,7 @@ getRestaurantDetails() {
             this.currentRestaurantName = this.restaurantObjectsForPassingArray[this.arrayCounter].name;
             this.currentRestaurantAddress = this.restaurantObjectsForPassingArray[this.arrayCounter].address;
             this.currentRestaurantWebsite = this.restaurantObjectsForPassingArray[this.arrayCounter].websiteURL;
+            this.currentRestaurantImage = this.restaurantObjectsForPassingArray[this.arrayCounter].photos[this.imageCounter];
             console.log(this.currentRestaurantName);
             console.log(this.currentRestaurantAddress);
             console.log(this.currentRestaurantWebsite);
@@ -193,7 +194,8 @@ getRestaurantDetails() {
         this.newFavorite = {
             restaurantName: this.currentRestaurantName,
             address: this.currentRestaurantAddress,
-            website: this.currentRestaurantWebsite
+            website: this.currentRestaurantWebsite,
+            image: this.currentRestaurantImage
         }
         console.log(this.newFavorite);
         this.favoriteService.addFavorites(this.newFavorite);

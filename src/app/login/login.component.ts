@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import  { DataService } from '../data-storage.service';
+
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { ApiKeyService } from '../apikey.service';
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   constructor(
               private firebaseService: FirebaseService,
               private authService: AuthService,
-              private dataService: DataService,
               private apiKeyService: ApiKeyService,
               private router: Router) { 
      this.subscription = this.firebaseService.startFirebase().subscribe(
@@ -63,7 +62,7 @@ export class LoginComponent implements OnInit {
     this.newUser = { email, password};
     this.authService.loginUser(email, password);
 
-    this.dataService.getUser(email)
+    this.authService.getUser(email)
       .subscribe(
           (response => {
             console.log("The json response is " + response.json());

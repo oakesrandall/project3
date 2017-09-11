@@ -15,7 +15,7 @@ export class AuthService {
 	loggedInUser = new Subject();
 	firebaseLoginError = 'Invalid email or password';
 	firebaseSignupError = 'Invalid email or password. Password must be at least 6 digits in length';
-	//user: Observable<firebase.User>;
+	
 	baseUrl = 'http://localhost:3000';
 	// Token return by firebase
 	token: string;
@@ -120,6 +120,23 @@ export class AuthService {
 		firebase.auth().signOut();
 		this.router.navigate(['']);
 		this.token = null;
+	}
+
+
+	// Get user from database
+	getUser(email) {
+		console.log("the user id is" + email);
+		console.log("sending user data to backend");
+
+		return this.http.get(`${this.baseUrl}/api/users/${email}`);
+	}
+
+	// Store user in database
+	storeUser(email) {
+		console.log("sending user data to backend");
+		
+		return this.http.post(`${this.baseUrl}/api/users/`, email);
+
 	}
 
 	
