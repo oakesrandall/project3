@@ -49,8 +49,15 @@ export class AuthService {
 				firebase.auth().currentUser.getToken()
 					.then(
 						(token: string) => this.token = token)
-				// Then route to home page
-				
+				// Store user to database
+				// this.storeUser(email)
+				// 	.subscribe(response => {
+              
+    //           			console.log("The json response is " + response.json());
+    						// Set user to newUser
+    						//this.newUser = response.json()
+    //       		})
+					// Then route to home page
 				this.router.navigate(['/home']);
 			})
 			.catch(error =>
@@ -78,6 +85,14 @@ export class AuthService {
 					firebase.auth().currentUser.getToken()
 						.then(
 							(token: string) => this.token = token)
+						// Store user to database
+						// this.storeUser(email)
+						// 	.subscribe(response => {
+              
+          //     			console.log("The json response is " + response.json());
+    						// //Set user to newUser
+    						// this.newUser = response.json()
+          // 				})
 					
 					//route user to homepage
 					return this.router.navigate(['/home']);

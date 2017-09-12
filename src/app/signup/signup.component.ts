@@ -59,10 +59,10 @@ export class SignupComponent implements OnInit {
     console.log(password);
     this.authService.signupUser(email, password)
     this.authService.storeUser(email)
-            .subscribe(response => {
+          //   .subscribe(response => {
               
-              console.log("The json response is " + response.json());
-          })
+          //     console.log("The json response is " + response.json());
+          // })
   }
 
  
