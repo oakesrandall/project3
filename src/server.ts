@@ -10,7 +10,7 @@ import { join } from 'path';
 
 
 import { router as foodrRouter } from './config/routes';
-const PORT = process.env.PORT || 3000;
+//var PORT = process.env.PORT || 3000;
 
 enableProdMode();
 
@@ -37,6 +37,10 @@ app.get('*', (req, res) => {
   res.render('index', { req });
 });
 
-app.listen(PORT, () => {
-  console.log(`listening on http://localhost:${PORT}!`);
+// app.listen(PORT, () => {
+//   console.log(`listening on http://localhost:${PORT}!`);
+// });
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
