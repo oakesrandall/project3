@@ -28,7 +28,7 @@ function create(req, res) {
 }
 
 function addFavorites(req, res) {
-
+	
 }
 
 function update(req, res) {

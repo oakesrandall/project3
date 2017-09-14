@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import  { DataService } from '../data-storage.service';
+
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { ApiKeyService } from '../apikey.service';
 import { FirebaseService } from '../firebase.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-login',
@@ -19,18 +21,30 @@ export class LoginComponent implements OnInit {
   photo: string;
   newUser = <any>{}
   loggedInUser = <any>{}
-  firebaseError;
+  firebaseErrorMessage: string;
+  //authToken = new Subject<string>();
+  token: string;
+  // User id returned by firebase
+  uid: string;
+
+  // email returned by firebase
+  email: string;
 
   constructor(
               private firebaseService: FirebaseService,
               private authService: AuthService,
-              private dataService: DataService,
               private apiKeyService: ApiKeyService,
               private router: Router) { 
      this.subscription = this.firebaseService.startFirebase().subscribe(
          message => {
            this.message = message;
      });
+     authService.firebaseAnnounced$.subscribe(
+         error => {
+           this.firebaseErrorMessage = error
+         }
+      )
+
   }
 
   ngOnInit() {
@@ -47,7 +61,8 @@ export class LoginComponent implements OnInit {
     console.log(password);
     this.newUser = { email, password};
     this.authService.loginUser(email, password);
-    this.dataService.getUser(email)
+
+    this.authService.getUser(email)
       .subscribe(
           (response => {
             console.log("The json response is " + response.json());
@@ -56,5 +71,6 @@ export class LoginComponent implements OnInit {
   
       
   }
+
 
 }

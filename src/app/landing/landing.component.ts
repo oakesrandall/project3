@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { DataService } from '../data-storage.service';
+
 import {  NgForm } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,6 @@ export class LandingComponent implements OnInit {
 
   constructor(
   	private authService: AuthService,
-    private dataService: DataService,
     private router: Router
   ) { }
 
