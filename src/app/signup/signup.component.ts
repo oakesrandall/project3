@@ -57,8 +57,8 @@ export class SignupComponent implements OnInit {
   	const password = newUser.password;
     console.log(email);
     console.log(password);
-    this.authService.signupUser(email, password)
-    this.authService.storeUser(email)
+    this.authService.signupUser(email, password);
+    //this.authService.storeUser(email)
           //   .subscribe(response => {
               
           //     console.log("The json response is " + response.json());
